@@ -1,0 +1,537 @@
+{
+  "_meta": {
+    "description": "Pest knowledge base for the Smart Pest Detection & Prediction System. Keys match the trained model's class labels (see backend/model/class_names.json). Content compiled from Sri Lanka Department of Agriculture (doa.gov.lk) advisories and general Integrated Pest Management (IPM) references. Intended for advisory use, not a substitute for a certified agronomist.",
+    "classes_source": "12 generic classes from Kaggle 'Agricultural Pests Image Dataset'; 7 Sri Lankan crop-pest classes (brown_planthopper, rice_stem_borer, fall_armyworm, fruit_fly, thrips, mealybug, leafhopper) added from the IP102 dataset.",
+    "sinhala_names_todo": "sinhala_name field intentionally omitted until verified with a Sinhala agronomy source; add per class later.",
+    "note_class_names": "class_names.json must match whatever model is loaded. The committed model has 12 classes; after retraining with the updated notebook it will have 19. Retrain and replace class_names.json together with pest_model.keras.",
+    "version": 2
+  },
+  "ants": {
+    "common_name": "Ants",
+    "scientific_name": "Family Formicidae",
+    "beneficial": false,
+    "severity": "low",
+    "crops_affected": ["vegetables", "fruit trees", "sugarcane", "home garden crops"],
+    "damage_symptoms": [
+      "Ants themselves rarely eat crops, but they farm and protect sap-sucking pests (aphids, mealybugs, scale) for their honeydew.",
+      "Presence of ant trails on stems often signals an aphid or mealybug infestation nearby.",
+      "Some species disturb roots and seedlings by nesting in the soil around them."
+    ],
+    "organic_treatments": [
+      "Control the sap-sucking pests (aphids/mealybugs) the ants are tending — remove the food source and ants leave.",
+      "Apply a sticky band (grease/petroleum jelly) around tree trunks to block ants from climbing.",
+      "Pour boiling water or a diluted neem solution into accessible ground nests.",
+      "Sprinkle wood ash or diatomaceous earth around plant bases."
+    ],
+    "chemical_treatments": [
+      "Ant baits containing borax or fipronil placed on trails (targets the colony).",
+      "Spot-treat nests with a labelled contact insecticide only if infestation is heavy."
+    ],
+    "prevention": [
+      "Keep the field free of honeydew-producing pests.",
+      "Remove decaying wood and debris that host nests.",
+      "Avoid over-mulching directly against stems."
+    ]
+  },
+  "bees": {
+    "common_name": "Bees",
+    "scientific_name": "Superfamily Apoidea",
+    "beneficial": true,
+    "severity": "none",
+    "crops_affected": [],
+    "damage_symptoms": [
+      "Bees are pollinators and are beneficial — they do not damage healthy crops.",
+      "Their presence usually indicates a healthy, flowering, pollinator-friendly field."
+    ],
+    "organic_treatments": [
+      "No treatment needed. Do not spray or destroy bees.",
+      "If a swarm settles in an unsafe location, contact a local beekeeper to relocate it — do not exterminate."
+    ],
+    "chemical_treatments": [
+      "None. Avoid spraying insecticides during flowering and daytime foraging hours to protect bees."
+    ],
+    "prevention": [
+      "Encourage bees for better pollination and yield.",
+      "Spray any necessary pesticides in the late evening when bees are not foraging, and never on open flowers."
+    ]
+  },
+  "beetle": {
+    "common_name": "Beetle",
+    "scientific_name": "Order Coleoptera",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["vegetables", "rice", "legumes", "leafy greens", "cucurbits"],
+    "damage_symptoms": [
+      "Irregular holes chewed in leaves, sometimes leaving only the leaf veins (skeletonised leaves).",
+      "Damage to flowers, fruits and stems depending on species.",
+      "Larvae (grubs) of some beetles feed on roots underground, causing wilting."
+    ],
+    "organic_treatments": [
+      "Hand-pick adult beetles in the early morning and drop them into soapy water.",
+      "Spray neem oil (azadirachtin) to deter feeding and disrupt larval development.",
+      "Use pheromone or light traps to monitor and reduce adult populations.",
+      "Encourage natural enemies such as birds, ground beetles and parasitic wasps."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled insecticide such as carbaryl or a pyrethroid when beetle numbers exceed the economic threshold.",
+      "Soil-applied insecticides for root-feeding grubs where recommended.",
+      "Always follow the pre-harvest interval on the product label."
+    ],
+    "prevention": [
+      "Practise crop rotation to break the beetle life cycle.",
+      "Remove crop residues and weeds that shelter beetles.",
+      "Use floating row covers on young vegetable crops."
+    ]
+  },
+  "caterpillar": {
+    "common_name": "Caterpillar (larval stage of moths/butterflies)",
+    "scientific_name": "Order Lepidoptera (larvae)",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice", "vegetables", "cabbage", "tomato", "maize", "leafy greens"],
+    "damage_symptoms": [
+      "Chewed leaf margins, large irregular holes, and defoliation.",
+      "Boring into fruits, pods, or stems (fruit borers, stem borers).",
+      "Presence of dark green or black droppings (frass) on leaves.",
+      "Rolled or webbed leaves where the larva shelters (leaf rollers)."
+    ],
+    "organic_treatments": [
+      "Hand-pick caterpillars and egg masses and destroy them.",
+      "Spray Bacillus thuringiensis (Bt) — a biological insecticide highly effective on young larvae and safe for beneficials.",
+      "Apply neem oil to deter feeding and egg-laying.",
+      "Install pheromone traps to catch adult moths and time control measures.",
+      "Encourage parasitic wasps (Trichogramma) and predatory birds."
+    ],
+    "chemical_treatments": [
+      "Use a labelled insecticide such as emamectin benzoate, spinosad, or chlorantraniliprole for heavy infestations.",
+      "Rotate insecticide groups to avoid resistance.",
+      "Spray in the evening when larvae are actively feeding."
+    ],
+    "prevention": [
+      "Scout fields regularly for egg masses on the underside of leaves.",
+      "Remove weeds and crop residues that host larvae.",
+      "Time planting to avoid peak moth flight periods."
+    ]
+  },
+  "earthworms": {
+    "common_name": "Earthworms",
+    "scientific_name": "Class Oligochaeta",
+    "beneficial": true,
+    "severity": "none",
+    "crops_affected": [],
+    "damage_symptoms": [
+      "Earthworms are beneficial soil organisms — they do not damage crops.",
+      "They improve soil structure, aeration, drainage and nutrient cycling.",
+      "A high earthworm count is a sign of healthy, fertile soil."
+    ],
+    "organic_treatments": [
+      "No treatment needed — protect and encourage earthworms."
+    ],
+    "chemical_treatments": [
+      "None. Avoid excessive tillage and harsh chemical fertilisers/pesticides that harm earthworm populations."
+    ],
+    "prevention": [
+      "Add organic matter (compost, mulch) to encourage earthworm activity.",
+      "Minimise deep tillage and avoid soil fumigants."
+    ]
+  },
+  "earwig": {
+    "common_name": "Earwig",
+    "scientific_name": "Order Dermaptera",
+    "beneficial": false,
+    "severity": "low",
+    "crops_affected": ["seedlings", "leafy vegetables", "soft fruits", "flowers"],
+    "damage_symptoms": [
+      "Small, irregular holes in leaves, petals and soft fruits, usually at night.",
+      "Damage to seedlings and tender shoots.",
+      "Note: earwigs are partly beneficial — they also eat aphids and insect eggs, so light populations can be tolerated."
+    ],
+    "organic_treatments": [
+      "Set rolled-up damp newspaper or cardboard traps at dusk and destroy earwigs collected in the morning.",
+      "Shallow containers of vegetable oil or beer as pitfall traps.",
+      "Remove damp hiding places (mulch piles, boards) near seedlings.",
+      "Apply diatomaceous earth around vulnerable plants."
+    ],
+    "chemical_treatments": [
+      "Spot-treat with a labelled insecticide bait only when seedling damage is severe."
+    ],
+    "prevention": [
+      "Keep the area around seedlings dry and free of debris.",
+      "Protect young transplants with collars until established."
+    ]
+  },
+  "grasshopper": {
+    "common_name": "Grasshopper / Locust",
+    "scientific_name": "Order Orthoptera (Suborder Caelifera)",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice", "maize", "vegetables", "grasses", "pasture", "young cereals"],
+    "damage_symptoms": [
+      "Ragged, chewed leaf edges and heavy defoliation in outbreaks.",
+      "Cut young shoots and can strip a plant rapidly when in large numbers.",
+      "Swarming locust forms can devastate entire fields."
+    ],
+    "organic_treatments": [
+      "Encourage natural predators — birds, poultry, spiders and predatory wasps.",
+      "Apply the biopesticide Nosema locustae or Metarhizium (green muscardine fungus) where available.",
+      "Neem-based sprays deter feeding on young crops.",
+      "Till the soil after harvest to expose and destroy egg pods."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled contact insecticide (e.g., malathion or a pyrethroid) during heavy infestations or hopper bands.",
+      "Bait formulations with insecticide-treated bran for localised control."
+    ],
+    "prevention": [
+      "Monitor field margins and grasslands where grasshoppers breed.",
+      "Keep weeds down to reduce egg-laying sites.",
+      "Coordinate area-wide control with neighbouring farms during outbreaks."
+    ]
+  },
+  "moth": {
+    "common_name": "Moth (adult stage)",
+    "scientific_name": "Order Lepidoptera (adults)",
+    "beneficial": false,
+    "severity": "medium",
+    "crops_affected": ["rice", "vegetables", "stored grain", "maize", "fruit crops"],
+    "damage_symptoms": [
+      "Adult moths themselves do not chew crops, but they lay eggs that hatch into destructive caterpillars.",
+      "Seeing many moths at night/around lights signals an incoming caterpillar generation.",
+      "Some (e.g., grain moths) infest stored produce."
+    ],
+    "organic_treatments": [
+      "Use pheromone traps and light traps to catch adult moths before they lay eggs.",
+      "Remove and destroy egg masses on the underside of leaves.",
+      "Encourage bats, birds and parasitic wasps (Trichogramma) that attack moth eggs.",
+      "Apply Bt or neem to the crop to kill the caterpillars once eggs hatch."
+    ],
+    "chemical_treatments": [
+      "Target the larval (caterpillar) stage with a labelled insecticide rather than spraying adults.",
+      "For stored-grain moths, use approved fumigation and airtight storage."
+    ],
+    "prevention": [
+      "Monitor moth catches in traps to predict and pre-empt caterpillar outbreaks.",
+      "Store grain in sealed, clean containers.",
+      "Remove crop residues that harbour pupae."
+    ]
+  },
+  "slug": {
+    "common_name": "Slug",
+    "scientific_name": "Class Gastropoda (shell-less)",
+    "beneficial": false,
+    "severity": "medium",
+    "crops_affected": ["leafy vegetables", "seedlings", "cabbage", "lettuce", "strawberry"],
+    "damage_symptoms": [
+      "Irregular holes with smooth edges in leaves and fruit, mostly on lower/inner leaves.",
+      "Silvery, slimy mucus trails on plants and soil — a tell-tale sign.",
+      "Seedlings can be cut off and destroyed overnight.",
+      "Most active at night and in damp, humid weather."
+    ],
+    "organic_treatments": [
+      "Hand-pick at night or early morning and destroy.",
+      "Set beer traps (shallow dishes) to attract and drown slugs.",
+      "Sprinkle crushed eggshells, wood ash, or diatomaceous earth as barriers around plants.",
+      "Encourage natural predators — ducks, frogs, ground beetles and birds.",
+      "Use iron phosphate slug pellets, which are safe for pets and wildlife."
+    ],
+    "chemical_treatments": [
+      "Metaldehyde molluscicide pellets applied sparingly around affected beds (follow label; keep away from children/pets)."
+    ],
+    "prevention": [
+      "Improve drainage and reduce excess moisture and dense mulch near stems.",
+      "Water in the morning so soil surface dries by night.",
+      "Clear hiding places — boards, stones, weeds and debris."
+    ]
+  },
+  "snail": {
+    "common_name": "Snail",
+    "scientific_name": "Class Gastropoda (shelled); incl. golden apple snail Pomacea spp. in paddy",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice/paddy", "leafy vegetables", "seedlings", "ornamentals"],
+    "damage_symptoms": [
+      "Irregular holes with smooth edges in leaves and stems; slime trails present.",
+      "Golden apple snails cut and eat young rice seedlings at the base in flooded paddies, causing missing hills.",
+      "Feed mostly at night and in wet conditions."
+    ],
+    "organic_treatments": [
+      "Hand-pick snails and egg clusters (bright pink egg masses of apple snails on stems) and destroy.",
+      "Place attractant baits (papaya/banana leaves) and collect snails in the morning.",
+      "Make bamboo/screen barriers at water inlets to stop apple snails entering paddy.",
+      "Keep water level low (2–3 cm) during early rice establishment to reduce snail activity.",
+      "Encourage ducks (rice-duck farming), which eat snails."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled molluscicide (e.g., metaldehyde or niclosamide) at recommended rates in paddy where infestation is severe.",
+      "Follow label rates carefully — molluscicides can be toxic to fish."
+    ],
+    "prevention": [
+      "Level paddy fields well and manage water depth to discourage snails.",
+      "Install screens at irrigation inlets.",
+      "Collect and destroy egg masses regularly during establishment."
+    ]
+  },
+  "wasp": {
+    "common_name": "Wasp",
+    "scientific_name": "Order Hymenoptera (Suborder Apocrita)",
+    "beneficial": true,
+    "severity": "low",
+    "crops_affected": ["ripe fruits (occasional nuisance)"],
+    "damage_symptoms": [
+      "Most wasps are beneficial — parasitic and predatory wasps kill caterpillars, aphids and other pests, providing natural control.",
+      "A few social wasps may nibble ripe/damaged fruit, but this is minor compared with their benefit.",
+      "Their main concern is stings near people, not crop damage."
+    ],
+    "organic_treatments": [
+      "Generally no treatment needed — conserve wasps as natural enemies of pests.",
+      "Bag or net high-value ripe fruit if wasp feeding is a problem.",
+      "Remove only nests that pose a direct stinging risk to workers, ideally at night, with care."
+    ],
+    "chemical_treatments": [
+      "Avoid broad-spectrum spraying, which kills these beneficial insects.",
+      "Treat only individual problem nests near work areas if strictly necessary."
+    ],
+    "prevention": [
+      "Encourage parasitic wasps for biological pest control.",
+      "Harvest ripe fruit promptly and remove fallen/rotting fruit."
+    ]
+  },
+  "weevil": {
+    "common_name": "Weevil",
+    "scientific_name": "Superfamily Curculionoidea",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice", "stored grain", "sweet potato", "banana", "coconut", "vegetables"],
+    "damage_symptoms": [
+      "Adults chew small holes and notches in leaves and stems.",
+      "Larvae bore inside stems, roots, tubers or grains — hidden but very damaging.",
+      "Stored-grain weevils hollow out rice and maize grains, leaving light, powdery grain.",
+      "Banana/coconut weevils tunnel into the corm/trunk, weakening the plant."
+    ],
+    "organic_treatments": [
+      "Use pheromone traps to monitor and mass-trap adults (e.g., banana/sweet-potato weevils).",
+      "Apply neem-based products to deter feeding and egg-laying.",
+      "Remove and destroy infested plant parts, tubers and crop residues.",
+      "For stored grain: sun-dry thoroughly, use airtight/hermetic storage, and mix in wood ash or neem leaves.",
+      "Encourage entomopathogenic nematodes/fungi (Beauveria bassiana) for soil-dwelling larvae."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled insecticide targeting adults during peak activity where thresholds are exceeded.",
+      "For stored grain, use approved grain protectants or fumigation in sealed stores.",
+      "Observe pre-harvest and storage safety intervals strictly."
+    ],
+    "prevention": [
+      "Practise crop rotation and field sanitation to break the life cycle.",
+      "Use clean, weevil-free planting material and seed.",
+      "Dry grain to safe moisture (<14%) before airtight storage."
+    ]
+  },
+  "brown_planthopper": {
+    "common_name": "Brown Planthopper",
+    "scientific_name": "Nilaparvata lugens",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice/paddy"],
+    "damage_symptoms": [
+      "Small brown sap-sucking hoppers clustered at the base of rice plants, just above the water line.",
+      "Causes 'hopperburn' — circular patches of yellowing and drying plants that spread across the field.",
+      "Transmits rice viruses (grassy stunt, ragged stunt).",
+      "Sudden population explosions (resurgence) often follow misuse of broad-spectrum insecticides."
+    ],
+    "organic_treatments": [
+      "Grow resistant/tolerant rice varieties recommended for your area.",
+      "Avoid excessive nitrogen fertiliser, which favours planthopper buildup.",
+      "Drain the field for 3–4 days to expose the plant base and reduce humidity at the base.",
+      "Conserve natural enemies — mirid bugs, spiders and wolf spiders; avoid spraying that kills them.",
+      "Apply neem-based products where infestation is starting."
+    ],
+    "chemical_treatments": [
+      "Use a selective insecticide such as buprofezin or pymetrozine when numbers exceed the threshold.",
+      "AVOID broad-spectrum insecticides (synthetic pyrethroids) — they kill natural enemies and trigger worse resurgence.",
+      "Direct the spray at the base of the plants where hoppers feed."
+    ],
+    "prevention": [
+      "Use recommended plant spacing and avoid dense, over-fertilised crops.",
+      "Synchronise planting with neighbours and keep a rice-free period to break the cycle.",
+      "Monitor the base of plants weekly and act early."
+    ]
+  },
+  "rice_stem_borer": {
+    "common_name": "Rice Stem Borer",
+    "scientific_name": "Scirpophaga incertulas (yellow stem borer) / Chilo spp.",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice/paddy"],
+    "damage_symptoms": [
+      "Caterpillars bore into the stem; the central shoot dies and dries — called 'deadheart' — during the vegetative stage.",
+      "At the flowering stage, panicles turn white and empty — called 'whitehead'.",
+      "Small bore holes on the stem and frass (droppings) inside.",
+      "Creamy-white egg masses covered with brown hairs on leaf tips."
+    ],
+    "organic_treatments": [
+      "Clip and destroy leaf tips carrying egg masses; remove and destroy stubble after harvest.",
+      "Install pheromone traps to monitor and mass-trap adult moths.",
+      "Release the egg parasitoid Trichogramma where available.",
+      "Grow resistant varieties and avoid excess nitrogen.",
+      "Encourage natural enemies and use light traps for the moths."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled granular or spray insecticide such as cartap hydrochloride or chlorantraniliprole at the deadheart/early stage.",
+      "Time the application to the moth flight peak indicated by traps.",
+      "Follow the pre-harvest interval on the label."
+    ],
+    "prevention": [
+      "Plough and flood fields after harvest to kill larvae in stubble.",
+      "Use certified, resistant planting material.",
+      "Synchronise planting across the area to avoid continuous host availability."
+    ]
+  },
+  "fall_armyworm": {
+    "common_name": "Fall Armyworm",
+    "scientific_name": "Spodoptera frugiperda",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["maize/corn", "rice", "vegetables", "grasses"],
+    "damage_symptoms": [
+      "Young larvae scrape leaves leaving 'windowpane' patches; older larvae make ragged holes.",
+      "Larvae hide deep in the whorl of maize, leaving moist sawdust-like frass (droppings).",
+      "A dark inverted 'Y' mark on the head and four dots in a square on the second-to-last segment identify the larva.",
+      "Can bore into cobs and destroy growing points."
+    ],
+    "organic_treatments": [
+      "Scout young plants twice a week; hand-pick and crush egg masses and larvae, and apply a pinch of dry sand/ash into the whorl.",
+      "Spray Bacillus thuringiensis (Bt) on young larvae — effective and safe for beneficials.",
+      "Use pheromone traps to detect moths and time control.",
+      "Encourage natural enemies (parasitic wasps, birds, earwigs).",
+      "Apply neem-based products into the whorl."
+    ],
+    "chemical_treatments": [
+      "Use a labelled insecticide such as spinosad, emamectin benzoate, or chlorantraniliprole directed into the whorl.",
+      "Rotate insecticide groups to prevent resistance.",
+      "Spray in the early morning or late evening when larvae are active."
+    ],
+    "prevention": [
+      "Plant early and avoid staggered planting that provides continuous food.",
+      "Practise crop rotation with non-host crops.",
+      "Keep fields weed-free and monitor with pheromone traps from emergence."
+    ]
+  },
+  "fruit_fly": {
+    "common_name": "Fruit Fly",
+    "scientific_name": "Bactrocera spp. (e.g., Bactrocera dorsalis)",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["mango", "guava", "banana", "cucurbits", "chili", "other fruits & vegetables"],
+    "damage_symptoms": [
+      "Females puncture the fruit skin to lay eggs, leaving small 'sting' marks and oozing.",
+      "Maggots tunnel inside, causing the fruit to rot and drop prematurely.",
+      "Cut-open fruit shows white maggots and brown, decayed flesh.",
+      "Heavy losses near harvest time."
+    ],
+    "organic_treatments": [
+      "Hang methyl-eugenol / pheromone traps to catch and monitor male flies (male annihilation technique).",
+      "Bag individual fruits with paper/net covers while they are still small.",
+      "Collect and destroy (bury deep or solarise) all fallen and infested fruit to break the cycle — sanitation is the single most important step.",
+      "Use protein bait sprays (a spot of yeast/protein hydrolysate + insecticide) to attract and kill females.",
+      "Harvest fruit slightly early where practical."
+    ],
+    "chemical_treatments": [
+      "Apply spot bait sprays containing a labelled insecticide rather than full-cover sprays.",
+      "Cover-spray only if infestation is severe, following the label and pre-harvest interval."
+    ],
+    "prevention": [
+      "Maintain strict orchard/field sanitation throughout the season.",
+      "Set up traps before fruits begin to ripen.",
+      "Coordinate trapping and sanitation with neighbouring growers for area-wide control."
+    ]
+  },
+  "thrips": {
+    "common_name": "Thrips",
+    "scientific_name": "Order Thysanoptera (e.g., Thrips, Scirtothrips spp.)",
+    "beneficial": false,
+    "severity": "medium",
+    "crops_affected": ["chili", "onion", "vegetables", "rice", "tea"],
+    "damage_symptoms": [
+      "Very tiny slender insects; rasp the leaf surface and suck sap, leaving silvery/whitish streaks.",
+      "Leaves and buds curl upward, crinkle and become distorted ('leaf curl' in chili).",
+      "Flowers and young fruit may be scarred or drop.",
+      "Important virus vectors (tospoviruses such as spotted wilt)."
+    ],
+    "organic_treatments": [
+      "Hang blue sticky traps to monitor and reduce adults.",
+      "Spray neem oil (azadirachtin), which disrupts thrips feeding and development.",
+      "Keep plants well-watered — thrips thrive under dry, stressed conditions.",
+      "Encourage predatory mites, minute pirate bugs and lacewings.",
+      "Remove weeds around the field that harbour thrips."
+    ],
+    "chemical_treatments": [
+      "Use a labelled insecticide such as spinosad or fipronil, rotating groups to avoid resistance.",
+      "Add a wetting agent and aim spray into leaf whorls/undersides where thrips hide.",
+      "Observe the pre-harvest interval."
+    ],
+    "prevention": [
+      "Use virus-free, healthy seedlings and reflective/silver mulch to repel thrips.",
+      "Avoid continuous cropping of the same susceptible crop.",
+      "Scout with sticky traps from early crop stages."
+    ]
+  },
+  "mealybug": {
+    "common_name": "Mealybug",
+    "scientific_name": "Planococcus / Phenacoccus spp.",
+    "beneficial": false,
+    "severity": "medium",
+    "crops_affected": ["fruits", "vegetables", "papaya", "cassava", "ornamentals", "many crops"],
+    "damage_symptoms": [
+      "Soft insects covered in white, cottony wax, clustered in leaf axils, undersides, stems and on fruit.",
+      "Suck sap causing yellowing, leaf curl, stunting and fruit drop.",
+      "Excrete sticky honeydew that leads to black sooty mould on leaves and fruit.",
+      "Often tended and spread by ants."
+    ],
+    "organic_treatments": [
+      "Prune and destroy heavily infested shoots and fruit.",
+      "Wash colonies off with a strong jet of water or a soap-water spray.",
+      "Spray neem oil or horticultural oil to smother them.",
+      "Control the ants that protect them (sticky bands on trunks) so natural enemies can work.",
+      "Release/encourage the mealybug destroyer beetle (Cryptolaemus) and ladybirds and parasitic wasps."
+    ],
+    "chemical_treatments": [
+      "Use a labelled systemic insecticide only for severe infestations, as the waxy coat resists contact sprays.",
+      "Add horticultural oil to improve coverage and penetration of the wax.",
+      "Follow the label and pre-harvest interval."
+    ],
+    "prevention": [
+      "Inspect and use clean, mealybug-free planting material.",
+      "Keep ant populations down around the crop.",
+      "Avoid excessive nitrogen and remove crop debris that harbours them."
+    ]
+  },
+  "leafhopper": {
+    "common_name": "Leafhopper",
+    "scientific_name": "Nephotettix spp. (rice) / Amrasca spp. (vegetables)",
+    "beneficial": false,
+    "severity": "high",
+    "crops_affected": ["rice/paddy", "tea", "vegetables", "cotton", "beans"],
+    "damage_symptoms": [
+      "Small green/brown wedge-shaped hoppers that jump/fly when disturbed; suck sap from leaves.",
+      "Cause yellowing, browning of leaf tips and margins ('hopperburn') and stunting.",
+      "Key vector of rice tungro virus and other plant diseases.",
+      "Honeydew and sooty mould may appear in heavy infestations."
+    ],
+    "organic_treatments": [
+      "Grow resistant varieties and avoid excess nitrogen fertiliser.",
+      "Use yellow sticky traps and light traps to monitor and reduce adults.",
+      "Conserve natural enemies — spiders, mirid bugs and egg parasitoids.",
+      "Apply neem-based sprays at early infestation.",
+      "Maintain balanced water management in paddy."
+    ],
+    "chemical_treatments": [
+      "Apply a labelled, need-based insecticide only when the action threshold is reached.",
+      "Avoid repeated broad-spectrum sprays that cause resurgence; rotate groups.",
+      "Direct spray to the lower canopy where hoppers feed."
+    ],
+    "prevention": [
+      "Use tungro-resistant rice varieties in virus-prone areas.",
+      "Synchronise planting and keep a fallow/rice-free period.",
+      "Scout regularly with sticky and light traps."
+    ]
+  }
+}

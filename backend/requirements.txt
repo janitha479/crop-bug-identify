@@ -1,0 +1,24 @@
+# Core web framework
+# Loose lower bounds (not exact pins) so pip can pick wheels that exist for your
+# Python version — important on very new Python releases where old pins have no wheels.
+Flask>=3.0
+flask-cors>=4.0
+python-dotenv>=1.0
+Pillow>=10.4
+numpy>=1.26
+
+# HTTP client — used to call the Gemini REST API (optional feature; chatbot still
+# works without a key via the template fallback). We use plain REST instead of the
+# google-generativeai SDK to avoid grpcio, which lacks wheels on the newest Python.
+requests>=2.31
+
+# --- Model inference (choose ONE, install manually; NOT required for the mock model) ---
+# The backend runs on a mock model out of the box. For REAL inference, install a runtime
+# that matches your exported model AND your Python version:
+#
+#   tensorflow==2.17.0        # loads pest_model.keras  (needs Python 3.9–3.12)
+#   tflite-runtime            # loads pest_model.tflite (lighter; good for newer Python)
+#   onnxruntime               # loads pest_model.onnx
+#
+# These are intentionally left out of the default install so `pip install -r requirements.txt`
+# never fails on a Python version TensorFlow doesn't support yet.

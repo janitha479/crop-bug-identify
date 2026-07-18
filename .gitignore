@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv*/
+venv/
+venv*/
+env/
+.pytest_cache/
+site-packages/
+
+# Environment / secrets
+.env
+*.env
+!.env.example
+
+# Model weights (large; trained on Colab and downloaded locally)
+backend/model/*.keras
+backend/model/*.h5
+backend/model/*.tflite
+backend/model/*.onnx
+# ...but DO commit the main trained model so teammates get it on clone (28 MB, under GitHub's 100 MB limit)
+!backend/model/pest_model.keras
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Uploads / runtime
+backend/uploads/
+*.log

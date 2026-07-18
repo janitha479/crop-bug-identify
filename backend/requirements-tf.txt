@@ -1,0 +1,5 @@
+# Backend requirements for a Python 3.11 / 3.12 environment that can run the REAL
+# trained model (pest_model.keras). TensorFlow has no wheels for Python 3.14, so use
+# this file with a 3.12 venv. For the mock-model-only setup, use requirements.txt.
+-r requirements.txt
+tensorflow>=2.16
