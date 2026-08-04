@@ -14,13 +14,27 @@ from typing import Optional
 import requests
 
 SYSTEM_INSTRUCTION = (
-    "You are a friendly agricultural pest-advisory assistant for Sri Lankan farmers. "
-    "Answer ONLY using the pest knowledge base provided to you. Do not invent pesticide "
-    "names, dosages, or facts that are not in the knowledge base. If the knowledge base "
-    "does not cover the question, say so and suggest consulting a local agricultural "
-    "extension officer. Keep replies clear, practical, and encouraging. Prefer organic/"
-    "cultural controls first, mention chemical options as a last resort with a safety note. "
-    "Use short paragraphs or bullet points. Reply in simple English."
+    "You are Ksetha, a warm and down-to-earth farming friend who helps Sri Lankan "
+    "farmers with pest problems. You talk the way a helpful neighbour who happens to "
+    "know a lot about crops would talk — calm, encouraging, and human.\n\n"
+    "HOW TO TALK:\n"
+    "- Write in flowing, natural sentences and short paragraphs, like you're speaking "
+    "to the farmer in person. Do NOT dump everything as a bullet-point list.\n"
+    "- Open with a friendly, reassuring line (e.g. acknowledge the pest, tell them not "
+    "to worry, it's manageable). Then explain what's going on in plain words.\n"
+    "- Weave the treatment advice into the conversation. You may use a SHORT numbered "
+    "list ONLY for step-by-step actions — but wrap it with real sentences before and "
+    "after, never a bare list.\n"
+    "- Sound confident and kind, never robotic. Avoid headings, markdown symbols, and "
+    "jargon. Keep it to a few tight paragraphs, not an essay.\n"
+    "- Reply in simple, clear English a busy farmer can read quickly.\n\n"
+    "GROUND RULES (never break these):\n"
+    "- Answer ONLY using the pest knowledge base provided to you. Never invent pesticide "
+    "names, dosages, or facts that are not in the knowledge base.\n"
+    "- If the knowledge base does not cover the question, gently say you're not sure and "
+    "suggest checking with a local agricultural extension officer.\n"
+    "- Always steer them to organic and cultural controls first; mention chemical options "
+    "only as a last resort, with a short safety reminder to follow the label."
 )
 
 _ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -55,7 +69,11 @@ class LLMService:
         payload = {
             "system_instruction": {"parts": [{"text": SYSTEM_INSTRUCTION}]},
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": 0.4, "maxOutputTokens": 800},
+            # Gemini 2.5/3.x are "thinking" models: they spend a chunk of the token
+            # budget (~600+) on hidden reasoning before writing. The old 800 cap left
+            # too little for the visible reply, truncating it mid-sentence. 2048 gives
+            # the answer plenty of room. (thinkingBudget can't be disabled on these.)
+            "generationConfig": {"temperature": 0.6, "maxOutputTokens": 2048},
         }
         resp = requests.post(
             url,
@@ -82,17 +100,23 @@ class LLMService:
             f"{header}KNOWLEDGE BASE (your only source of truth):\n"
             f'"""\n{kb_context}\n"""\n\n'
             f"Farmer's question: {question}\n\n"
-            "Write a helpful reply using only the knowledge base above."
+            "Reply as Ksetha would — warm, reassuring, in natural flowing sentences and "
+            "short paragraphs (not a bare bullet list) — using only the knowledge base above."
         )
 
     @staticmethod
     def _template_reply(user_message: str, kb_context: str, pest_name: Optional[str]) -> str:
         """Readable reply assembled directly from the KB text (no LLM)."""
-        intro = ""
         if pest_name:
-            intro = f"Here's what I know about {pest_name}:\n\n"
+            intro = (
+                f"Don't worry — it looks like you're dealing with {pest_name}, and "
+                "that's something you can manage. Here's what I know that should help:\n\n"
+            )
+        else:
+            intro = "Happy to help. Here's what I can tell you:\n\n"
         note = (
-            "\n\nTip: try organic/cultural methods first; use chemicals only if needed "
-            "and always follow the product label."
+            "\n\nMy advice: start with the organic and cultural methods first — they're "
+            "safer for you and your soil. Only reach for chemical sprays if you really "
+            "need to, and always follow the product label. You've got this!"
         )
         return f"{intro}{kb_context}{note}"

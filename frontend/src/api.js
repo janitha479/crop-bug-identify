@@ -27,6 +27,44 @@ export async function health() {
   return res.json()
 }
 
+// Current weather for a coordinate (Open-Meteo, proxied server-side).
+// Returns the weather object, or null on any failure.
+export async function getWeather(lat, lon) {
+  try {
+    const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.weather || null
+  } catch {
+    return null
+  }
+}
+
+// Look up coordinates for a place name (Open-Meteo geocoding, proxied server-side).
+// Returns an array of place matches, or [] on any failure.
+export async function geocode(query) {
+  try {
+    const res = await fetch(`/api/geocode?q=${encodeURIComponent(query)}`)
+    if (!res.ok) return []
+    const data = await res.json()
+    return Array.isArray(data.results) ? data.results : []
+  } catch {
+    return []
+  }
+}
+
+// Outbreak forecast for the next few months at a coordinate.
+// Returns the full forecast object, or null on any failure.
+export async function getForecast(lat, lon, months = 3) {
+  try {
+    const res = await fetch(`/api/forecast?lat=${lat}&lon=${lon}&months=${months}`)
+    if (!res.ok) return null
+    return await res.json()
+  } catch {
+    return null
+  }
+}
+
 // Live agriculture headlines (proxied server-side from Google News RSS).
 // Returns [] on any failure so the UI can fall back to curated tips.
 export async function getNews() {

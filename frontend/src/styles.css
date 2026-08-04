@@ -298,3 +298,65 @@ h1, h2, h3, .display-5, .navbar-brand {
   .chat-launcher { right: 16px; bottom: 16px; }
   .hero-stats { gap: 1.25rem; }
 }
+
+/* ---------- Current-weather banner (News page) ---------- */
+.weather-banner { border-radius: 1rem; }
+.weather-banner.card {
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--brand-light), #ffffff);
+}
+.weather-banner.text-secondary {
+  padding: 1rem 1.25rem; border: 1px dashed var(--line);
+  border-radius: 1rem; background: #fafafa;
+}
+.weather-emoji { font-size: 2.6rem; line-height: 1; }
+.weather-temp { font-size: 2rem; color: var(--brand-dark); }
+.weather-stat-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+
+/* ---------- Outbreak Forecast page ---------- */
+.forecast-summary.card { border: 1px solid var(--line); border-radius: 1rem; background: var(--brand-light); }
+
+.outbreak-card { border-radius: 1rem; border: 1px solid var(--line); border-left-width: 5px; }
+.outbreak-card.risk-severe   { border-left-color: #c62828; }
+.outbreak-card.risk-high     { border-left-color: #ef6c00; }
+.outbreak-card.risk-moderate { border-left-color: #f9a825; }
+.outbreak-card.risk-low      { border-left-color: #2e7d32; }
+
+.risk-badge {
+  font-size: 0.72rem; font-weight: 600; white-space: nowrap;
+  padding: 0.2rem 0.55rem; border-radius: 999px; border: 1px solid transparent;
+}
+.risk-badge-severe   { background: #fde8e8; color: #c62828; border-color: #f5c2c2; }
+.risk-badge-high     { background: #fff0e0; color: #ef6c00; border-color: #f6d3ac; }
+.risk-badge-moderate { background: #fff8e1; color: #b28704; border-color: #f0e0a8; }
+.risk-badge-low      { background: var(--brand-light); color: var(--brand-dark); border-color: #cfe6d0; }
+
+.outbreak-when { font-size: 0.85rem; }
+.outbreak-climate { color: var(--ink-soft); }
+.outbreak-sub-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em;
+  color: var(--ink-soft); font-weight: 600;
+}
+.outbreak-tips { padding-left: 1.1rem; font-size: 0.9rem; }
+.outbreak-tips li { margin-bottom: 0.2rem; }
+.chip-static { cursor: default; }
+.outbreak-source { color: var(--brand-dark); font-weight: 500; }
+
+/* ---------- Location picker (Weather + Forecast) ---------- */
+.location-picker.card { border: 1px solid var(--line); border-radius: 1rem; }
+.location-current { color: var(--brand-dark); font-weight: 600; }
+.btn-outline-brand {
+  color: var(--brand-dark); border: 1px solid var(--brand);
+  background: #fff;
+}
+.btn-outline-brand:hover:not(:disabled) { background: var(--brand-light); }
+.location-results .list-group { border-radius: 0.6rem; overflow: hidden; }
+.location-result-btn {
+  display: flex; flex-direction: column; align-items: flex-start;
+  width: 100%; text-align: left; padding: 0.5rem 0.85rem;
+  border: none; background: #fff;
+}
+.location-result-btn:hover { background: var(--brand-light); }

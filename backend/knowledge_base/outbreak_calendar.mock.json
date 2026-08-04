@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "description": "MOCK seasonal outbreak calendar for the Smart Pest Detection & Prediction System. Maps each damaging pest to the months it typically peaks in Sri Lanka, plus the temperature/humidity conditions that favour it. Keys match knowledge_base/pests.json. This is plausible demonstration data aligned to Sri Lanka's two cropping seasons (Maha: Sep/Oct-Mar, wetter NE monsoon; Yala: Apr/May-Aug, SW monsoon) and general IPM knowledge. It is NOT validated field data and should be replaced with real historical pest records when available. Months are 1=January..12=December.",
+    "seasons": {
+      "maha": [9, 10, 11, 12, 1, 2, 3],
+      "yala": [4, 5, 6, 7, 8]
+    },
+    "version": 1
+  },
+  "pests": {
+    "brown_planthopper": {
+      "peak_months": [12, 1, 2],
+      "season": "Maha (late)",
+      "temp_min": 25, "temp_max": 33,
+      "humidity_min": 70,
+      "driver": "Warm, humid, densely-planted and over-fertilised paddy in late Maha."
+    },
+    "leafhopper": {
+      "peak_months": [11, 12, 1],
+      "season": "Maha",
+      "temp_min": 24, "temp_max": 32,
+      "humidity_min": 65,
+      "driver": "Wet, warm paddy conditions; spreads tungro virus in early Maha."
+    },
+    "rice_stem_borer": {
+      "peak_months": [11, 12, 1, 6, 7],
+      "season": "Both",
+      "temp_min": 24, "temp_max": 31,
+      "humidity_min": 70,
+      "driver": "Overlapping paddy stages across both seasons let moths breed continuously."
+    },
+    "snail": {
+      "peak_months": [10, 11, 12, 4, 5],
+      "season": "Both (establishment)",
+      "temp_min": 22, "temp_max": 32,
+      "humidity_min": 75,
+      "driver": "Flooded paddy at establishment after monsoon rains; golden apple snail thrives."
+    },
+    "slug": {
+      "peak_months": [11, 12, 1],
+      "season": "Maha",
+      "temp_min": 18, "temp_max": 28,
+      "humidity_min": 80,
+      "driver": "Cool, damp, humid nights during the NE monsoon."
+    },
+    "caterpillar": {
+      "peak_months": [3, 4, 10, 11],
+      "season": "Season transitions",
+      "temp_min": 24, "temp_max": 33,
+      "humidity_min": 60,
+      "driver": "Moth flights at the start of each season produce caterpillar generations."
+    },
+    "moth": {
+      "peak_months": [3, 4, 10, 11],
+      "season": "Season transitions",
+      "temp_min": 24, "temp_max": 33,
+      "humidity_min": 55,
+      "driver": "Adult moth flights precede caterpillar outbreaks; watch light traps."
+    },
+    "fall_armyworm": {
+      "peak_months": [3, 4, 5, 10, 11],
+      "season": "Both (maize)",
+      "temp_min": 26, "temp_max": 34,
+      "humidity_min": 55,
+      "driver": "Warm weather and young maize whorls; a fast-spreading migratory pest."
+    },
+    "grasshopper": {
+      "peak_months": [6, 7, 8],
+      "season": "Yala (dry)",
+      "temp_min": 28, "temp_max": 36,
+      "humidity_min": 30,
+      "driver": "Hot, dry Yala weather and grassy field margins favour breeding."
+    },
+    "thrips": {
+      "peak_months": [1, 2, 6, 7, 8],
+      "season": "Dry spells",
+      "temp_min": 27, "temp_max": 36,
+      "humidity_min": 20,
+      "driver": "Hot, dry, water-stressed crops (chili, onion); also spreads viruses."
+    },
+    "mealybug": {
+      "peak_months": [1, 2, 3, 6, 7],
+      "season": "Dry spells",
+      "temp_min": 26, "temp_max": 34,
+      "humidity_min": 40,
+      "driver": "Warm, dry conditions and ant activity build cottony colonies."
+    },
+    "fruit_fly": {
+      "peak_months": [3, 4, 5, 6],
+      "season": "Fruiting (Mar-Jun)",
+      "temp_min": 25, "temp_max": 34,
+      "humidity_min": 60,
+      "driver": "Mango, guava and cucurbit fruiting season with warm, humid weather."
+    },
+    "beetle": {
+      "peak_months": [4, 5, 6],
+      "season": "Yala (early)",
+      "temp_min": 25, "temp_max": 33,
+      "humidity_min": 50,
+      "driver": "Warming early-Yala weather brings out leaf-feeding beetles and grubs."
+    },
+    "weevil": {
+      "peak_months": [3, 4, 8, 9],
+      "season": "Post-harvest",
+      "temp_min": 24, "temp_max": 33,
+      "humidity_min": 60,
+      "driver": "Post-harvest grain storage and warm, humid stores favour weevil buildup."
+    },
+    "ants": {
+      "peak_months": [2, 3, 4, 7, 8],
+      "season": "Dry spells",
+      "temp_min": 26, "temp_max": 35,
+      "humidity_min": 30,
+      "driver": "Dry weather drives ants to farm aphids and mealybugs for honeydew."
+    },
+    "earwig": {
+      "peak_months": [11, 12, 1],
+      "season": "Maha",
+      "temp_min": 18, "temp_max": 28,
+      "humidity_min": 70,
+      "driver": "Cool, damp conditions bring earwigs to seedlings at night."
+    }
+  }
+}

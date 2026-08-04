@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import NewsCard from '../components/NewsCard'
 import LiveNewsCard from '../components/LiveNewsCard'
+import WeatherCard from '../components/WeatherCard'
+import LocationPicker from '../components/LocationPicker'
 import { getNews } from '../api'
 import { NEWS, CATEGORIES } from '../data/news'
 
@@ -31,6 +33,16 @@ export default function News() {
           crops, bugs and good practice.
         </p>
       </header>
+
+      {/* Current weather at the user's location */}
+      <section className="mb-5">
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <h2 className="h4 fw-bold mb-0">Weather at your location</h2>
+          <span className="badge bg-light text-secondary border">live</span>
+        </div>
+        <LocationPicker />
+        <WeatherCard />
+      </section>
 
       {/* Live headlines */}
       <section className="mb-5">

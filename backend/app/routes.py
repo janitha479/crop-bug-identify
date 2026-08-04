@@ -39,6 +39,71 @@ def news():
     return jsonify({"items": items, "count": len(items)})
 
 
+@api.get("/geocode")
+def geocode():
+    """Look up coordinates for a place name (Open-Meteo geocoding, keyless).
+
+    Query param:
+      q (str, required) — place name, e.g. "Kandy"
+
+    Returns {results: [{name, admin1, country, latitude, longitude}, ...]}."""
+    query = (request.args.get("q") or "").strip()
+    if len(query) < 2:
+        return jsonify({"error": "Provide a place name of at least 2 characters."}), 400
+    results = _services()["weather"].geocode(query)
+    return jsonify({"results": results, "count": len(results)})
+
+
+@api.get("/weather")
+def weather():
+    """Current weather for the user's location, via Open-Meteo (keyless).
+
+    Query params:
+      lat (float, required) — latitude from the browser's geolocation
+      lon (float, required) — longitude
+
+    Returns {weather: {...}} or {weather: null} if the lookup fails."""
+    try:
+        lat = float(request.args.get("lat", ""))
+        lon = float(request.args.get("lon", ""))
+    except (TypeError, ValueError):
+        return jsonify({"error": "lat and lon query params are required (numbers)."}), 400
+
+    if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+        return jsonify({"error": "lat/lon out of range."}), 400
+
+    data = _services()["weather"].get_weather(lat, lon)
+    return jsonify({"weather": data})
+
+
+@api.get("/forecast")
+def forecast():
+    """Outbreak forecast for the next few months at the user's location.
+
+    Query params:
+      lat (float, required) — latitude
+      lon (float, required) — longitude
+      months (int, optional, default 3, max 6) — how far ahead to look
+
+    Returns a ranked list of likely pest surges with reasons and prevention tips."""
+    try:
+        lat = float(request.args.get("lat", ""))
+        lon = float(request.args.get("lon", ""))
+    except (TypeError, ValueError):
+        return jsonify({"error": "lat and lon query params are required (numbers)."}), 400
+
+    if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+        return jsonify({"error": "lat/lon out of range."}), 400
+
+    try:
+        months = int(request.args.get("months", 3))
+    except (TypeError, ValueError):
+        months = 3
+
+    data = _services()["forecast"].forecast(lat, lon, months_ahead=months)
+    return jsonify(data)
+
+
 @api.post("/detect")
 def detect():
     """Image -> pest identification + treatment reply.

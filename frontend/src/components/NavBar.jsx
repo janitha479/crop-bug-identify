@@ -35,6 +35,9 @@ export default function NavBar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/bugs">Bugs</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/forecast">Forecast</NavLink>
+            </li>
             <li className="nav-item ms-md-2">
               <button type="button" className="btn btn-brand btn-sm" onClick={openChat}>
                 💬 Ask the assistant

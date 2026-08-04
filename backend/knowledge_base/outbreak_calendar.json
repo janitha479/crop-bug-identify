@@ -1,0 +1,292 @@
+{
+  "_meta": {
+    "description": "MOCK seasonal outbreak calendar for the Smart Pest Detection & Prediction System. Maps each damaging pest to the months it typically peaks in Sri Lanka, plus the temperature/humidity conditions that favour it. Keys match knowledge_base/pests.json. This is plausible demonstration data aligned to Sri Lanka's two cropping seasons (Maha: Sep/Oct-Mar, wetter NE monsoon; Yala: Apr/May-Aug, SW monsoon) and general IPM knowledge. It is NOT validated field data and should be replaced with real historical pest records when available. Months are 1=January..12=December.",
+    "seasons": {
+      "maha": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "yala": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "version": 1,
+    "peak_months_source": "peak_months derived from GBIF occurrence records where available (source/record count per pest); climate thresholds remain expert-set. 'mock' entries fell back to the original hand-written calendar."
+  },
+  "pests": {
+    "brown_planthopper": {
+      "peak_months": [
+        10,
+        11
+      ],
+      "season": "Maha (late)",
+      "temp_min": 25,
+      "temp_max": 33,
+      "humidity_min": 70,
+      "driver": "Warm, humid, densely-planted and over-fertilised paddy in late Maha.",
+      "peak_source": "gbif_region",
+      "gbif_records": 760,
+      "gbif_taxon": "Nilaparvata lugens (Stål, 1854)",
+      "gbif_rank": "SPECIES"
+    },
+    "leafhopper": {
+      "peak_months": [
+        10
+      ],
+      "season": "Maha",
+      "temp_min": 24,
+      "temp_max": 32,
+      "humidity_min": 65,
+      "driver": "Wet, warm paddy conditions; spreads tungro virus in early Maha.",
+      "peak_source": "gbif_region",
+      "gbif_records": 685,
+      "gbif_taxon": "Nephotettix Matsumura, 1902",
+      "gbif_rank": "GENUS"
+    },
+    "rice_stem_borer": {
+      "peak_months": [
+        9
+      ],
+      "season": "Both",
+      "temp_min": 24,
+      "temp_max": 31,
+      "humidity_min": 70,
+      "driver": "Overlapping paddy stages across both seasons let moths breed continuously.",
+      "peak_source": "gbif_region",
+      "gbif_records": 505,
+      "gbif_taxon": "Scirpophaga incertulas Walker, 1863",
+      "gbif_rank": "SPECIES"
+    },
+    "snail": {
+      "peak_months": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        12
+      ],
+      "season": "Both (establishment)",
+      "temp_min": 22,
+      "temp_max": 32,
+      "humidity_min": 75,
+      "driver": "Flooded paddy at establishment after monsoon rains; golden apple snail thrives.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 22312,
+      "gbif_taxon": "Gastropoda",
+      "gbif_rank": "CLASS"
+    },
+    "slug": {
+      "peak_months": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        12
+      ],
+      "season": "Maha",
+      "temp_min": 18,
+      "temp_max": 28,
+      "humidity_min": 80,
+      "driver": "Cool, damp, humid nights during the NE monsoon.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 22312,
+      "gbif_taxon": "Gastropoda",
+      "gbif_rank": "CLASS"
+    },
+    "caterpillar": {
+      "peak_months": [
+        4,
+        8
+      ],
+      "season": "Season transitions",
+      "temp_min": 24,
+      "temp_max": 33,
+      "humidity_min": 60,
+      "driver": "Moth flights at the start of each season produce caterpillar generations.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 29667,
+      "gbif_taxon": "Lepidoptera",
+      "gbif_rank": "ORDER"
+    },
+    "moth": {
+      "peak_months": [
+        4,
+        8
+      ],
+      "season": "Season transitions",
+      "temp_min": 24,
+      "temp_max": 33,
+      "humidity_min": 55,
+      "driver": "Adult moth flights precede caterpillar outbreaks; watch light traps.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 29667,
+      "gbif_taxon": "Lepidoptera",
+      "gbif_rank": "ORDER"
+    },
+    "fall_armyworm": {
+      "peak_months": [
+        1,
+        7,
+        8,
+        9,
+        10
+      ],
+      "season": "Both (maize)",
+      "temp_min": 26,
+      "temp_max": 34,
+      "humidity_min": 55,
+      "driver": "Warm weather and young maize whorls; a fast-spreading migratory pest.",
+      "peak_source": "gbif_region",
+      "gbif_records": 941,
+      "gbif_taxon": "Spodoptera frugiperda J.E.Smith, 1797",
+      "gbif_rank": "SPECIES"
+    },
+    "grasshopper": {
+      "peak_months": [
+        4,
+        8
+      ],
+      "season": "Yala (dry)",
+      "temp_min": 28,
+      "temp_max": 36,
+      "humidity_min": 30,
+      "driver": "Hot, dry Yala weather and grassy field margins favour breeding.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 2297,
+      "gbif_taxon": "Orthoptera",
+      "gbif_rank": "ORDER"
+    },
+    "thrips": {
+      "peak_months": [
+        1,
+        3,
+        4,
+        5,
+        8,
+        12
+      ],
+      "season": "Dry spells",
+      "temp_min": 27,
+      "temp_max": 36,
+      "humidity_min": 20,
+      "driver": "Hot, dry, water-stressed crops (chili, onion); also spreads viruses.",
+      "peak_source": "gbif_region",
+      "gbif_records": 761,
+      "gbif_taxon": "Scirtothrips Shull, 1909",
+      "gbif_rank": "GENUS"
+    },
+    "mealybug": {
+      "peak_months": [
+        1,
+        2,
+        3,
+        6,
+        7
+      ],
+      "season": "Dry spells",
+      "temp_min": 26,
+      "temp_max": 34,
+      "humidity_min": 40,
+      "driver": "Warm, dry conditions and ant activity build cottony colonies.",
+      "peak_source": "mock",
+      "gbif_records": 0,
+      "gbif_taxon": null,
+      "gbif_rank": null
+    },
+    "fruit_fly": {
+      "peak_months": [
+        10
+      ],
+      "season": "Fruiting (Mar-Jun)",
+      "temp_min": 25,
+      "temp_max": 34,
+      "humidity_min": 60,
+      "driver": "Mango, guava and cucurbit fruiting season with warm, humid weather.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 301,
+      "gbif_taxon": "Bactrocera dorsalis (Hendel, 1912)",
+      "gbif_rank": "SPECIES"
+    },
+    "beetle": {
+      "peak_months": [
+        2,
+        3,
+        4,
+        10
+      ],
+      "season": "Yala (early)",
+      "temp_min": 25,
+      "temp_max": 33,
+      "humidity_min": 50,
+      "driver": "Warming early-Yala weather brings out leaf-feeding beetles and grubs.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 10083,
+      "gbif_taxon": "Coleoptera",
+      "gbif_rank": "ORDER"
+    },
+    "weevil": {
+      "peak_months": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "season": "Post-harvest",
+      "temp_min": 24,
+      "temp_max": 33,
+      "humidity_min": 60,
+      "driver": "Post-harvest grain storage and warm, humid stores favour weevil buildup.",
+      "peak_source": "mock",
+      "gbif_records": 0,
+      "gbif_taxon": null,
+      "gbif_rank": null
+    },
+    "ants": {
+      "peak_months": [
+        1,
+        2,
+        4,
+        7,
+        8,
+        12
+      ],
+      "season": "Dry spells",
+      "temp_min": 26,
+      "temp_max": 35,
+      "humidity_min": 30,
+      "driver": "Dry weather drives ants to farm aphids and mealybugs for honeydew.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 2768,
+      "gbif_taxon": "Formicidae",
+      "gbif_rank": "FAMILY"
+    },
+    "earwig": {
+      "peak_months": [
+        3,
+        4,
+        8,
+        12
+      ],
+      "season": "Maha",
+      "temp_min": 18,
+      "temp_max": 28,
+      "humidity_min": 70,
+      "driver": "Cool, damp conditions bring earwigs to seedlings at night.",
+      "peak_source": "gbif_lk",
+      "gbif_records": 137,
+      "gbif_taxon": "Dermaptera",
+      "gbif_rank": "ORDER"
+    }
+  }
+}

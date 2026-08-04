@@ -12,6 +12,8 @@ from .services.kb_service import KnowledgeBase
 from .services.llm_service import LLMService
 from .services.model_service import load_model
 from .services.news_service import NewsService
+from .services.weather_service import WeatherService
+from .services.forecast_service import ForecastService
 
 
 def create_app(config: Config = None) -> Flask:
@@ -27,7 +29,16 @@ def create_app(config: Config = None) -> Flask:
     model = load_model(config)
     llm = LLMService(config)
     news = NewsService(config)
-    app.extensions["pest_services"] = {"kb": kb, "model": model, "llm": llm, "news": news}
+    weather = WeatherService(config)
+    forecast = ForecastService(config, kb, weather)
+    app.extensions["pest_services"] = {
+        "kb": kb,
+        "model": model,
+        "llm": llm,
+        "news": news,
+        "weather": weather,
+        "forecast": forecast,
+    }
 
     app.register_blueprint(api, url_prefix="/api")
 
@@ -41,6 +52,9 @@ def create_app(config: Config = None) -> Flask:
                     "/api/detect (POST)",
                     "/api/chat (POST)",
                     "/api/news",
+                    "/api/geocode?q=",
+                    "/api/weather?lat=&lon=",
+                    "/api/forecast?lat=&lon=&months=",
                 ],
             }
         )
