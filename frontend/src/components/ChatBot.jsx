@@ -2,6 +2,8 @@
 // embedded inside the floating widget popup. Logic is unchanged from before — it just
 // fills its parent container (.chat-embed) instead of the whole viewport.
 import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Camera, Send, X } from 'lucide-react'
 import { detectPest, chat, health } from '../api'
 import { useLocation } from '../context/LocationContext'
 import PestCard from './PestCard'
@@ -110,26 +112,34 @@ export default function ChatBot() {
       )}
 
       <div className="chat-scroll" ref={scrollRef}>
-        {messages.map((m, i) => (
-          <div key={i} className={`msg-row ${m.role}`}>
-            <div className={`bubble ${m.role}`}>
-              {m.imageUrl && m.role === 'user' && (
-                <img src={m.imageUrl} alt="uploaded" className="uploaded mb-2" />
-              )}
-              {m.role === 'bot' && m.pest && (
-                <PestCard pest={m.pest} topPrediction={m.topPrediction} imageUrl={m.imageUrl} />
-              )}
-              {m.text && <div>{m.text}</div>}
-            </div>
-          </div>
-        ))}
+        <AnimatePresence initial={false}>
+          {messages.map((m, i) => (
+            <motion.div
+              key={i}
+              className={`msg-row ${m.role}`}
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className={`bubble ${m.role}`}>
+                {m.imageUrl && m.role === 'user' && (
+                  <img src={m.imageUrl} alt="uploaded" className="uploaded mb-2" />
+                )}
+                {m.role === 'bot' && m.pest && (
+                  <PestCard pest={m.pest} topPrediction={m.topPrediction} imageUrl={m.imageUrl} />
+                )}
+                {m.text && <div>{m.text}</div>}
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
         {busy && (
-          <div className="msg-row bot">
+          <motion.div className="msg-row bot" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <div className="bubble bot typing-dots">
               <span>●</span> <span>●</span> <span>●</span>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
 
@@ -138,7 +148,9 @@ export default function ChatBot() {
           <div className="mb-2">
             <div className="attach-preview">
               <img src={filePreview} alt="preview" />
-              <button type="button" onClick={clearFile} title="Remove">×</button>
+              <button type="button" onClick={clearFile} title="Remove" aria-label="Remove attachment">
+                <X size={11} />
+              </button>
             </div>
           </div>
         )}
@@ -150,15 +162,17 @@ export default function ChatBot() {
             className="d-none"
             onChange={onPickFile}
           />
-          <button
+          <motion.button
             type="button"
-            className="btn btn-outline-success"
+            className="btn btn-outline-brand d-inline-flex align-items-center"
             onClick={() => fileInputRef.current?.click()}
             title="Attach a pest photo"
             disabled={busy}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            📷
-          </button>
+            <Camera size={18} />
+          </motion.button>
           <input
             type="text"
             className="form-control"
@@ -167,9 +181,15 @@ export default function ChatBot() {
             onChange={(e) => setInput(e.target.value)}
             disabled={busy}
           />
-          <button type="submit" className="btn btn-success" disabled={busy || (!input.trim() && !file)}>
-            Send
-          </button>
+          <motion.button
+            type="submit"
+            className="btn btn-brand d-inline-flex align-items-center gap-1"
+            disabled={busy || (!input.trim() && !file)}
+            whileHover={{ scale: busy ? 1 : 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Send size={16} />
+          </motion.button>
         </div>
       </form>
     </div>
