@@ -369,3 +369,33 @@ h1, h2, h3, .display-5, .navbar-brand {
   font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em;
   color: var(--ink-soft); font-weight: 600;
 }
+
+/* ---------- Modal shell ---------- */
+.app-modal-backdrop {
+  position: fixed; inset: 0; z-index: 1080;
+  background: rgba(15, 32, 20, 0.45);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 3vh 1rem; overflow-y: auto;
+}
+.app-modal {
+  background: #fff; border-radius: 1rem; width: 100%; max-width: 640px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+.app-modal-wide { max-width: 980px; }
+.app-modal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1.25rem; border-bottom: 1px solid var(--line);
+}
+.app-modal-body { padding: 1.25rem; }
+
+/* Saved conversations */
+.conversation-list .list-group-item { border-color: var(--line); }
+.conversation-open {
+  border: none; background: none; padding: 0.25rem 0; color: inherit;
+}
+.conversation-open:hover .fw-semibold { color: var(--brand-dark); text-decoration: underline; }
+.transcript .msg-row { display: flex; margin-bottom: 0.5rem; }
+.transcript .msg-row.user { justify-content: flex-end; }
+.transcript .bubble { max-width: 85%; padding: 0.6rem 0.85rem; border-radius: 0.9rem; }
+.transcript .bubble.user { background: var(--brand); color: #fff; }
+.transcript .bubble.bot { background: var(--brand-light); color: var(--ink); }

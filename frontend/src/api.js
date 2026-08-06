@@ -97,15 +97,35 @@ export async function downloadReport() {
   URL.revokeObjectURL(url)
 }
 
-export async function chat(message, pest) {
+// Ask the assistant. `opts` may carry the farmer's coordinates (so it can use live
+// weather / the outbreak forecast) and a conversation id to keep the thread going.
+export async function chat(message, pest, opts = {}) {
+  const { lat, lon, conversationId } = opts
   const res = await fetch('/api/chat', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message, pest }),
+    headers: authHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({
+      message,
+      pest,
+      lat,
+      lon,
+      conversation_id: conversationId,
+    }),
   })
   const data = await res.json()
   if (!res.ok) throw new Error(data.error || 'Chat failed')
   return data
+}
+
+// --- Saved conversations ---
+export function listConversations() {
+  return apiJson('/api/conversations')
+}
+export function getConversation(id) {
+  return apiJson(`/api/conversations/${id}`)
+}
+export function deleteConversation(id) {
+  return apiJson(`/api/conversations/${id}`, { method: 'DELETE' })
 }
 
 export async function health() {

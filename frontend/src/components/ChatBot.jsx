@@ -3,13 +3,15 @@
 // fills its parent container (.chat-embed) instead of the whole viewport.
 import { useEffect, useRef, useState } from 'react'
 import { detectPest, chat, health } from '../api'
+import { useLocation } from '../context/LocationContext'
 import PestCard from './PestCard'
 
 const WELCOME = {
   role: 'bot',
   text:
-    "👋 Hi! I'm your pest assistant. Upload a photo of the insect or pest on your crop, " +
-    "and I'll try to identify it and tell you how to deal with it. You can also just ask me a question.",
+    "👋 Hi! I'm your farming assistant. Upload a photo of an insect or pest and I'll " +
+    "identify it and tell you how to deal with it. You can also ask me anything about " +
+    "your crops — watering, planting, the weather today, or what pests to expect next.",
 }
 
 export default function ChatBot() {
@@ -20,6 +22,10 @@ export default function ChatBot() {
   const [busy, setBusy] = useState(false)
   const [status, setStatus] = useState(null) // {model, llm}
   const [lastPest, setLastPest] = useState(null) // class label for follow-up context
+  // Server-side conversation id — set on the first reply when signed in, then sent
+  // back with each message so the whole thread is saved together.
+  const [conversationId, setConversationId] = useState(null)
+  const { location } = useLocation()
 
   const scrollRef = useRef(null)
   const fileInputRef = useRef(null)
@@ -79,7 +85,12 @@ export default function ChatBot() {
         })
       } else {
         pushMessage({ role: 'user', text })
-        const data = await chat(text, lastPest)
+        const data = await chat(text, lastPest, {
+          lat: location?.lat,
+          lon: location?.lon,
+          conversationId,
+        })
+        if (data.conversation_id) setConversationId(data.conversation_id)
         pushMessage({ role: 'bot', text: data.reply })
       }
     } catch (err) {

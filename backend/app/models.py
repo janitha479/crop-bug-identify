@@ -23,6 +23,9 @@ class User(Base):
     detections: Mapped[list["Detection"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
+    conversations: Mapped[list["Conversation"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {
@@ -56,6 +59,65 @@ class Farm(Base):
             "latitude": self.latitude,
             "longitude": self.longitude,
             "place_label": self.place_label,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+        }
+
+
+class Conversation(Base):
+    """A saved chat session, so a farmer can reopen past advice after closing the chat."""
+
+    __tablename__ = "conversations"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    title: Mapped[str] = mapped_column(String(160), default="New conversation")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
+
+    user: Mapped["User"] = relationship(back_populates="conversations")
+    messages: Mapped[list["Message"]] = relationship(
+        back_populates="conversation",
+        cascade="all, delete-orphan",
+        order_by="Message.id",
+    )
+
+    def to_dict(self, with_messages=False):
+        data = {
+            "id": self.id,
+            "title": self.title,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+            "message_count": len(self.messages) if with_messages else None,
+        }
+        if with_messages:
+            data["messages"] = [m.to_dict() for m in self.messages]
+        return data
+
+
+class Message(Base):
+    """One turn in a saved conversation ('user' or 'bot')."""
+
+    __tablename__ = "messages"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    conversation_id: Mapped[int] = mapped_column(
+        ForeignKey("conversations.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    role: Mapped[str] = mapped_column(String(10), default="user")  # "user" | "bot"
+    text: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+    conversation: Mapped["Conversation"] = relationship(back_populates="messages")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "role": self.role,
+            "text": self.text,
             "created_at": self.created_at.isoformat() if self.created_at else None,
         }
 

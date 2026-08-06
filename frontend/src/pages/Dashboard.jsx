@@ -2,15 +2,18 @@
 // one call), an add-farm form (reusing the shared LocationPicker), recent pest
 // scans, and a PDF export.
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import LocationPicker from '../components/LocationPicker'
+import FarmForecastModal from '../components/FarmForecastModal'
+import ConversationModal from '../components/ConversationModal'
 import { useAuth } from '../context/AuthContext'
 import { useLocation } from '../context/LocationContext'
 import {
   createFarm,
+  deleteConversation,
   deleteFarm,
   downloadReport,
   farmsOverview,
+  listConversations,
   listDetections,
 } from '../api'
 
@@ -21,20 +24,25 @@ export default function Dashboard() {
   const { location } = useLocation()
   const [overview, setOverview] = useState(null) // null = loading
   const [detections, setDetections] = useState([])
+  const [conversations, setConversations] = useState([])
   const [farmName, setFarmName] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [forecastFarm, setForecastFarm] = useState(null)  // farm shown in the modal
+  const [openConv, setOpenConv] = useState(null)          // saved chat shown in the modal
 
   const refresh = async () => {
     setOverview(null)
-    try {
-      const [ov, det] = await Promise.all([farmsOverview(), listDetections()])
-      setOverview(ov.farms)
-      setDetections(det.detections)
-    } catch (err) {
-      setError(err.message || 'Could not load your dashboard')
-      setOverview([])
-    }
+    // Settled (not all-or-nothing): one failing panel shouldn't blank the dashboard.
+    const [ov, det, convs] = await Promise.allSettled([
+      farmsOverview(),
+      listDetections(),
+      listConversations(),
+    ])
+    setOverview(ov.status === 'fulfilled' ? ov.value.farms : [])
+    setDetections(det.status === 'fulfilled' ? det.value.detections : [])
+    setConversations(convs.status === 'fulfilled' ? convs.value.conversations : [])
+    setError(ov.status === 'rejected' ? (ov.reason?.message || 'Could not load your farms') : '')
   }
 
   useEffect(() => { refresh() }, [])
@@ -164,14 +172,55 @@ export default function Dashboard() {
                       </div>
                     )}
 
-                    <Link to="/forecast" className="btn btn-sm btn-outline-brand mt-3">
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-brand mt-3"
+                      onClick={() => setForecastFarm(farm)}
+                    >
                       Full forecast →
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        )}
+      </section>
+
+      {/* Saved conversations */}
+      <section className="mb-5">
+        <h2 className="h5 fw-bold mb-3">Saved conversations</h2>
+        {conversations.length === 0 ? (
+          <div className="alert alert-light border">
+            Your chats with the assistant are saved here automatically — ask it something
+            with 💬 and you can reopen the advice any time.
+          </div>
+        ) : (
+          <ul className="list-group conversation-list">
+            {conversations.map((c) => (
+              <li key={c.id} className="list-group-item d-flex align-items-center gap-2">
+                <button
+                  type="button"
+                  className="conversation-open flex-grow-1 text-start"
+                  onClick={() => setOpenConv(c)}
+                >
+                  <span className="fw-semibold">{c.title}</span>
+                  <span className="text-secondary small d-block">
+                    {c.updated_at ? new Date(c.updated_at).toLocaleString() : ''}
+                  </span>
+                </button>
+                <button
+                  type="button" className="btn-close" aria-label="Delete conversation"
+                  onClick={async () => {
+                    try {
+                      await deleteConversation(c.id)
+                      await refresh()
+                    } catch (err) { setError(err.message) }
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
         )}
       </section>
 
@@ -204,6 +253,17 @@ export default function Dashboard() {
           </div>
         )}
       </section>
+
+      {forecastFarm && (
+        <FarmForecastModal farm={forecastFarm} onClose={() => setForecastFarm(null)} />
+      )}
+      {openConv && (
+        <ConversationModal
+          conversationId={openConv.id}
+          title={openConv.title}
+          onClose={() => setOpenConv(null)}
+        />
+      )}
     </div>
   )
 }

@@ -10,6 +10,7 @@ from .config import Config
 from . import db
 from .routes import api
 from .routes_auth import auth_api
+from .routes_chat import chat_api
 from .routes_farms import farms_api
 from .services.kb_service import KnowledgeBase
 from .services.llm_service import LLMService
@@ -53,6 +54,7 @@ def create_app(config: Config = None) -> Flask:
     app.register_blueprint(api, url_prefix="/api")
     app.register_blueprint(auth_api, url_prefix="/api")
     app.register_blueprint(farms_api, url_prefix="/api")
+    app.register_blueprint(chat_api, url_prefix="/api")
 
     @app.get("/")
     def index():

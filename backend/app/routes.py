@@ -4,6 +4,8 @@ import io
 from flask import Blueprint, current_app, jsonify, request
 from PIL import Image, UnidentifiedImageError
 
+from .services import agri_context
+
 api = Blueprint("api", __name__)
 
 
@@ -215,8 +217,11 @@ def chat():
     """Follow-up text question, optionally about a previously detected pest.
 
     JSON body:
-      message (str, required)
-      pest    (str, optional)  — class label from a previous /detect
+      message         (str, required)
+      pest            (str, optional) — class label from a previous /detect
+      lat, lon        (float, optional) — farmer's location; lets the assistant use
+                      live weather and the outbreak forecast when the question needs it
+      conversation_id (int, optional) — continue a saved conversation
     """
     data = request.get_json(silent=True) or {}
     message = (data.get("message") or "").strip()
@@ -249,5 +254,64 @@ def chat():
         )
         pest_name = None
 
+    # Give the assistant live weather / outbreak-forecast figures when the question
+    # depends on them (e.g. "should I spray today?", "what's coming next month?").
+    lat, lon = _coords(data)
+    kb_text += agri_context.build_live_context(svc, message, lat, lon)
+
     reply = svc["llm"].reply(message, kb_context=kb_text, pest_name=pest_name)
-    return jsonify({"reply": reply, "pest": pest_label or None})
+
+    conversation_id = _log_chat(data.get("conversation_id"), message, reply)
+    return jsonify(
+        {
+            "reply": reply,
+            "pest": pest_label or None,
+            "conversation_id": conversation_id,
+        }
+    )
+
+
+def _coords(data):
+    """Parse optional lat/lon from a JSON body; (None, None) if absent/invalid."""
+    try:
+        lat = float(data.get("lat"))
+        lon = float(data.get("lon"))
+    except (TypeError, ValueError):
+        return None, None
+    if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+        return None, None
+    return lat, lon
+
+
+def _log_chat(conversation_id, user_text, bot_text):
+    """Append this exchange to the signed-in farmer's saved conversation.
+
+    Creates the conversation on first message (titled from the question). Returns
+    the conversation id, or None when nobody is signed in. Never breaks the reply."""
+    from .auth import optional_user
+    from .models import Conversation, Message
+
+    user, session = optional_user()
+    if user is None:
+        return None
+    try:
+        conv = None
+        if conversation_id:
+            conv = session.get(Conversation, int(conversation_id))
+            if conv is not None and conv.user_id != user.id:
+                conv = None  # never write into someone else's conversation
+        if conv is None:
+            title = user_text[:80] + ("…" if len(user_text) > 80 else "")
+            conv = Conversation(user_id=user.id, title=title or "New conversation")
+            session.add(conv)
+            session.flush()  # assign an id
+
+        session.add(Message(conversation_id=conv.id, role="user", text=user_text[:4000]))
+        session.add(Message(conversation_id=conv.id, role="bot", text=bot_text[:4000]))
+        session.commit()
+        return conv.id
+    except Exception:
+        session.rollback()
+        return None
+    finally:
+        session.close()
