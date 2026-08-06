@@ -360,3 +360,12 @@ h1, h2, h3, .display-5, .navbar-brand {
   border: none; background: #fff;
 }
 .location-result-btn:hover { background: var(--brand-light); }
+
+/* ---------- Auth pages + dashboard ---------- */
+.auth-card { max-width: 440px; border: 1px solid var(--line); border-radius: 1rem; }
+.farm-card { border-radius: 1rem; border: 1px solid var(--line); }
+.farm-weather-emoji { font-size: 1.6rem; line-height: 1; }
+.farm-risk .outbreak-sub-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em;
+  color: var(--ink-soft); font-weight: 600;
+}

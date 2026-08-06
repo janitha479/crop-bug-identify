@@ -7,7 +7,10 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 from .config import Config
+from . import db
 from .routes import api
+from .routes_auth import auth_api
+from .routes_farms import farms_api
 from .services.kb_service import KnowledgeBase
 from .services.llm_service import LLMService
 from .services.model_service import load_model
@@ -23,6 +26,13 @@ def create_app(config: Config = None) -> Flask:
     app.config["MAX_CONTENT_LENGTH"] = config.MAX_CONTENT_LENGTH
 
     CORS(app, resources={r"/api/*": {"origins": config.CORS_ORIGINS}})
+
+    # Database (optional): enables login + dashboard when DATABASE_URL is set.
+    if db.init_engine(config.DATABASE_URL):
+        db.create_all()
+        print("[db] PostgreSQL connected — auth & dashboard enabled.")
+    else:
+        print("[db] No DATABASE_URL — auth & dashboard disabled (rest of app runs).")
 
     # Initialise services once at startup and stash them on the app.
     kb = KnowledgeBase(config.KB_PATH)
@@ -41,6 +51,8 @@ def create_app(config: Config = None) -> Flask:
     }
 
     app.register_blueprint(api, url_prefix="/api")
+    app.register_blueprint(auth_api, url_prefix="/api")
+    app.register_blueprint(farms_api, url_prefix="/api")
 
     @app.get("/")
     def index():
@@ -55,6 +67,10 @@ def create_app(config: Config = None) -> Flask:
                     "/api/geocode?q=",
                     "/api/weather?lat=&lon=",
                     "/api/forecast?lat=&lon=&months=",
+                    "/api/auth/register (POST)",
+                    "/api/auth/login (POST)",
+                    "/api/farms (GET/POST)",
+                    "/api/farms/overview",
                 ],
             }
         )

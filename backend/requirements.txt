@@ -12,6 +12,15 @@ numpy>=1.26
 # google-generativeai SDK to avoid grpcio, which lacks wheels on the newest Python.
 requests>=2.31
 
+# --- Auth + database (farmer login & dashboard) ---
+# SQLAlchemy is a pure-Python ORM. psycopg2-binary is the PostgreSQL driver — it ships
+# prebuilt wheels for Python 3.12 (use the .venv312 environment). PyJWT signs login
+# tokens; fpdf2 builds the farm PDF report. All pure-Python / wheel-only, no build tools.
+SQLAlchemy>=2.0
+psycopg2-binary>=2.9
+PyJWT>=2.8
+fpdf2>=2.7
+
 # --- Model inference (choose ONE, install manually; NOT required for the mock model) ---
 # The backend runs on a mock model out of the box. For REAL inference, install a runtime
 # that matches your exported model AND your Python version:

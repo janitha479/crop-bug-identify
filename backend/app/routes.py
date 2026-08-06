@@ -24,9 +24,15 @@ def health():
             "status": "ok",
             "model": "mock" if svc["model"].is_mock else "trained",
             "llm": "gemini" if svc["llm"].enabled else "template",
+            "database": "on" if _db_enabled() else "off",
             "classes": svc["kb"].classes,
         }
     )
+
+
+def _db_enabled():
+    from .db import is_enabled
+    return is_enabled()
 
 
 @api.get("/news")
@@ -161,6 +167,9 @@ def detect():
             "Please try a clearer, closer, well-lit photo of the insect for a better result."
         )
 
+    # If a signed-in farmer made this request, log it to their scan history.
+    _log_detection(top, confident, kb_entry, reply)
+
     return jsonify(
         {
             "confident": confident,
@@ -170,6 +179,35 @@ def detect():
             "reply": reply,
         }
     )
+
+
+def _log_detection(top, confident, kb_entry, reply):
+    """Best-effort logging of a detection for the current user (if authenticated).
+    Never blocks or breaks the detection response."""
+    from .auth import optional_user
+    from .models import Detection
+
+    user, session = optional_user()
+    if user is None:
+        return
+    try:
+        farm_id = request.form.get("farm_id")
+        session.add(
+            Detection(
+                user_id=user.id,
+                farm_id=int(farm_id) if farm_id and farm_id.isdigit() else None,
+                pest_label=top["label"],
+                common_name=(kb_entry or {}).get("common_name", top["label"]),
+                confidence=float(top["confidence"]),
+                confident="yes" if confident else "no",
+                reply=reply[:2000],
+            )
+        )
+        session.commit()
+    except Exception:
+        session.rollback()
+    finally:
+        session.close()
 
 
 @api.post("/chat")

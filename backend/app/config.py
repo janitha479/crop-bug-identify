@@ -22,6 +22,12 @@ class Config:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
     GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash").strip()
 
+    # Auth + database. DATABASE_URL is a PostgreSQL connection string (e.g. from Neon).
+    # If unset, the auth/dashboard features are disabled but the rest of the app still runs.
+    DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+    JWT_SECRET = os.getenv("JWT_SECRET", "dev-insecure-change-me").strip()
+    JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", "168"))  # 7 days
+
     # Model
     MODEL_PATH = BASE_DIR / os.getenv("MODEL_PATH", "model/pest_model.keras")
     CLASS_NAMES_PATH = BASE_DIR / os.getenv("CLASS_NAMES_PATH", "model/class_names.json")
