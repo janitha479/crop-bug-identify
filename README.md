@@ -2,7 +2,7 @@
 
 An AI-powered web platform for Sri Lankan farmers: upload a crop/pest photo, the system identifies the pest and replies (chatbot-style) with pest details and how to control it, using an on-project knowledge base.
 
-Based on the project proposal *Smart Pest Detection and Prediction System* (U.P.U. Sudarika, SLIBA, 2026).
+Based on the project proposal *Smart Pest Detection and Prediction System* 
 
 ## What works now (Phase 1–4)
 
