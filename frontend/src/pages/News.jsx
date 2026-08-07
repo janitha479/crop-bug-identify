@@ -98,7 +98,7 @@ export default function News() {
               <div className="empty-state-icon"><Newspaper size={24} /></div>
               <div className="fw-semibold">Live news unavailable</div>
               <div className="text-secondary small mt-1">
-                Make sure the backend is running — meanwhile, explore the tips below.
+                Make sure the backend is running. Meanwhile, explore the tips below.
               </div>
             </div>
           )}

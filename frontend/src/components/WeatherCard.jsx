@@ -39,13 +39,13 @@ export default function WeatherCard() {
   if (state.status !== 'ok') {
     return (
       <div className="weather-banner text-secondary d-flex align-items-center gap-2">
-        <CloudRain size={18} /> Couldn’t load weather right now — make sure the backend is running.
+        <CloudRain size={18} /> Couldn’t load weather right now. Make sure the backend is running.
       </div>
     )
   }
 
   const w = state.data
-  const round = (v) => (v === null || v === undefined ? '—' : Math.round(v))
+  const round = (v) => (v === null || v === undefined ? '-' : Math.round(v))
 
   const STATS = [
     { Icon: Thermometer, label: 'Feels like', value: `${round(w.feels_like)}${w.units.temperature}` },

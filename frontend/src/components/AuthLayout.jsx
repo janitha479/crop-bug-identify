@@ -31,7 +31,7 @@ export default function AuthLayout({ children }) {
                 Your farm, <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>protected</span>
               </h2>
               <p style={{ opacity: 0.85, maxWidth: '42ch' }}>
-                Create an account to keep everything in one place — your land, its weather, and what
+                Create an account to keep everything in one place: your land, its weather, and what
                 is coming next season.
               </p>
               <ul className="list-unstyled mt-4 mb-0">

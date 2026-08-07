@@ -1,4 +1,4 @@
-// Curated "farming tips & guides" content — evergreen educational material for Sri
+// Curated "farming tips & guides" content - evergreen educational material for Sri
 // Lankan farmers. Shown alongside the LIVE headlines (from /api/news) and used as the
 // fallback when the live feed is unavailable. Images are verified Unsplash stock photos.
 
@@ -15,7 +15,7 @@ export const NEWS = [
     title: 'Maha season & the North-East monsoon',
     date: '2026-07-05',
     summary:
-      'The Maha cultivation season runs roughly September–March on the North-East monsoon rains. ' +
+      'The Maha cultivation season runs roughly September to March on the North-East monsoon rains. ' +
       'Plan paddy nurseries and land preparation around the first reliable rains, and keep drainage ' +
       'channels clear before heavy downpours.',
     source: 'Department of Meteorology',
@@ -28,7 +28,7 @@ export const NEWS = [
     title: 'Managing crops through a Yala dry spell',
     date: '2026-06-28',
     summary:
-      'During the drier Yala season (May–August) in the dry zone, mulch beds to hold soil moisture, ' +
+      'During the drier Yala season (May to August) in the dry zone, mulch beds to hold soil moisture, ' +
       'irrigate early morning or evening to cut evaporation, and prioritise water for flowering and ' +
       'fruiting stages when crops are most sensitive to stress.',
     source: 'Agri advisory',
@@ -41,7 +41,7 @@ export const NEWS = [
     title: 'Brown planthopper watch in paddy',
     date: '2026-07-02',
     summary:
-      'Brown planthopper can cause "hopperburn" — patches of paddy drying out and collapsing. ' +
+      'Brown planthopper can cause "hopperburn": patches of paddy drying out and collapsing. ' +
       'Avoid over-applying nitrogen, keep field bunds weed-free, and scout the base of the plants ' +
       'weekly. Encourage natural predators like spiders rather than spraying at first sight.',
     source: 'Pest advisory',
@@ -55,7 +55,7 @@ export const NEWS = [
     date: '2026-06-20',
     summary:
       'Check the whorl of young maize plants for ragged, window-pane feeding and moist sawdust-like ' +
-      'frass. Hand-pick egg masses where practical and act while larvae are small — older larvae hide ' +
+      'frass. Hand-pick egg masses where practical and act while larvae are small, since older larvae hide ' +
       'deep in the whorl and are much harder to control.',
     source: 'Pest advisory',
   },
@@ -68,7 +68,7 @@ export const NEWS = [
     date: '2026-06-15',
     summary:
       'Not every insect in the field is a pest. Bees pollinate, earthworms build healthy soil, and ' +
-      'many wasps hunt caterpillars. Broad sprays kill these allies too — identify first, then treat ' +
+      'many wasps hunt caterpillars. Broad sprays kill these allies too, so identify first, then treat ' +
       'only the real problem.',
     source: 'Knowledge base',
   },
@@ -107,7 +107,7 @@ export const NEWS = [
     date: '2026-06-18',
     summary:
       'Growing the same crop in the same bed season after season lets soil pests and diseases build up. ' +
-      'Rotate families — for example follow leafy greens with legumes — to starve specialist pests and ' +
+      'Rotate families, for example following leafy greens with legumes, to starve specialist pests and ' +
       'refresh soil fertility.',
     source: 'Agri advisory',
   },
@@ -159,7 +159,7 @@ export const NEWS = [
     date: '2026-06-08',
     summary:
       'If you must spray: read the label, wear gloves and a mask, mix the correct dose, spray in calm ' +
-      'weather, and respect the pre-harvest interval. More is not better — overuse breeds resistant ' +
+      'weather, and respect the pre-harvest interval. More is not better, because overuse breeds resistant ' +
       'pests and risks your health.',
     source: 'Safety advisory',
   },

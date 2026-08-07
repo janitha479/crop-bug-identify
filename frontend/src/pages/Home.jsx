@@ -24,7 +24,7 @@ const FEATURES = [
   {
     Icon: BookOpen,
     title: 'Grounded expert advice',
-    text: 'Guidance from a curated knowledge base — symptoms, organic and chemical control, and prevention.',
+    text: 'Guidance from a curated knowledge base: symptoms, organic and chemical control, and prevention.',
     image: PHOTOS.farmerHands,
   },
   {
@@ -90,7 +90,7 @@ export default function Home() {
               </motion.div>
 
               <motion.h1 variants={fadeUp}>
-                Identify crop pests in seconds — and know <span className="accent-word">exactly</span> what to do.
+                Identify crop pests in seconds, and know <span className="accent-word">exactly</span> what to do.
               </motion.h1>
 
               <motion.p className="lead hero-lead mt-4" variants={fadeUp}>
@@ -148,7 +148,7 @@ export default function Home() {
           <div className="eyebrow">Why use it</div>
           <h2 className="section-title display-6 mt-2">Everything you need to protect your harvest</h2>
           <p className="lead-muted mx-auto mt-3">
-            Three tools working together — vision, knowledge and prediction — so you can act early
+            Three tools working together (vision, knowledge and prediction) so you can act early
             instead of reacting to damage.
           </p>
         </Reveal>

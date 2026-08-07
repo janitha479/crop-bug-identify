@@ -1,5 +1,5 @@
 // The pest-assistant chatbot, extracted from the old full-screen App so it can be
-// embedded inside the floating widget popup. Logic is unchanged from before — it just
+// embedded inside the floating widget popup. Logic is unchanged from before - it just
 // fills its parent container (.chat-embed) instead of the whole viewport.
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -13,7 +13,7 @@ const WELCOME = {
   text:
     "👋 Hi! I'm your farming assistant. Upload a photo of an insect or pest and I'll " +
     "identify it and tell you how to deal with it. You can also ask me anything about " +
-    "your crops — watering, planting, the weather today, or what pests to expect next.",
+    "your crops: watering, planting, the weather today, or what pests to expect next.",
 }
 
 export default function ChatBot() {
@@ -24,7 +24,7 @@ export default function ChatBot() {
   const [busy, setBusy] = useState(false)
   const [status, setStatus] = useState(null) // {model, llm}
   const [lastPest, setLastPest] = useState(null) // class label for follow-up context
-  // Server-side conversation id — set on the first reply when signed in, then sent
+  // Server-side conversation id - set on the first reply when signed in, then sent
   // back with each message so the whole thread is saved together.
   const [conversationId, setConversationId] = useState(null)
   const { location } = useLocation()
@@ -70,7 +70,7 @@ export default function ChatBot() {
     try {
       if (file) {
         // Own object URL for the message, independent of the preview URL that
-        // clearFile() revokes — otherwise the thumbnail breaks after sending.
+        // clearFile() revokes - otherwise the thumbnail breaks after sending.
         const imageUrl = URL.createObjectURL(file)
         pushMessage({ role: 'user', text, imageUrl })
         clearFile()

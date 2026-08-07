@@ -1,9 +1,9 @@
-// Reference gallery for the Bugs page — a reading guide to the insects Sri Lankan
+// Reference gallery for the Bugs page - a reading guide to the insects Sri Lankan
 // farmers meet, NOT the model's class list. `inModel: true` marks the pests the
 // trained CNN can identify from a photo; the rest are here for learning only.
 //
 // Images live in `frontend/public/bugs/` and are served from `/bugs/...`. Each entry
-// lists BOTH extensions — <Img/> tries `.jpg` first, then `.png`, so either works.
+// lists BOTH extensions - <Img/> tries `.jpg` first, then `.png`, so either works.
 // See public/bugs/README.md for the full list of expected filenames. If neither file
 // exists, <Img/> falls back to the themed gradient + `emoji`, so the card still looks
 // intentional rather than broken.
@@ -15,18 +15,16 @@ export const BUGS = [
   {
     label: "ants",
     name: "Ants",
-    emoji: "🐜",
     scientific: "Formicidae",
     group: "General",
     inModel: true,
     image: ["/bugs/ants.jpg", "/bugs/ants.png"],
     learnMore: "https://en.wikipedia.org/wiki/Ant",
-    blurb: "Often farm aphids and mealybugs for honeydew and protect them from predators — ant trails on stems usually mean a sap-sucking pest is nearby.",
+    blurb: "Often farm aphids and mealybugs for honeydew and protect them from predators. Ant trails on stems usually mean a sap-sucking pest is nearby.",
   },
   {
     label: "bees",
     name: "Bees",
-    emoji: "🐝",
     scientific: "Apoidea",
     group: "Beneficial",
     beneficial: true,
@@ -38,7 +36,6 @@ export const BUGS = [
   {
     label: "beetle",
     name: "Beetle",
-    emoji: "🪲",
     scientific: "Coleoptera",
     group: "General",
     inModel: true,
@@ -49,30 +46,27 @@ export const BUGS = [
   {
     label: "caterpillar",
     name: "Caterpillar",
-    emoji: "🐛",
     scientific: "Lepidoptera (larvae)",
     group: "General",
     inModel: true,
     image: ["/bugs/caterpillar.jpg", "/bugs/caterpillar.png"],
     learnMore: "https://en.wikipedia.org/wiki/Caterpillar",
-    blurb: "Larvae of moths and butterflies. Voracious leaf-eaters — hand-pick while numbers are low and use Bt on young larvae.",
+    blurb: "Larvae of moths and butterflies. Voracious leaf-eaters. Hand-pick while numbers are low and use Bt on young larvae.",
   },
   {
     label: "earthworms",
     name: "Earthworms",
-    emoji: "🪱",
     scientific: "Oligochaeta",
     group: "Beneficial",
     beneficial: true,
     inModel: true,
     image: ["/bugs/earthworms.jpg", "/bugs/earthworms.png"],
     learnMore: "https://en.wikipedia.org/wiki/Earthworm",
-    blurb: "Soil engineers that improve structure, drainage and fertility. A high count is a sign of healthy soil — leave them be.",
+    blurb: "Soil engineers that improve structure, drainage and fertility. A high count is a sign of healthy soil, so leave them be.",
   },
   {
     label: "earwig",
     name: "Earwig",
-    emoji: "🦂",
     scientific: "Dermaptera",
     group: "General",
     inModel: true,
@@ -83,7 +77,6 @@ export const BUGS = [
   {
     label: "grasshopper",
     name: "Grasshopper",
-    emoji: "🦗",
     scientific: "Caelifera",
     group: "General",
     inModel: true,
@@ -94,7 +87,6 @@ export const BUGS = [
   {
     label: "moth",
     name: "Moth",
-    emoji: "🦋",
     scientific: "Lepidoptera (adults)",
     group: "General",
     inModel: true,
@@ -105,7 +97,6 @@ export const BUGS = [
   {
     label: "slug",
     name: "Slug",
-    emoji: "🐌",
     scientific: "Gastropoda",
     group: "General",
     inModel: true,
@@ -116,7 +107,6 @@ export const BUGS = [
   {
     label: "snail",
     name: "Snail",
-    emoji: "🐌",
     scientific: "Gastropoda",
     group: "Paddy",
     inModel: true,
@@ -127,19 +117,17 @@ export const BUGS = [
   {
     label: "wasp",
     name: "Wasp",
-    emoji: "🐝",
     scientific: "Apocrita",
     group: "Beneficial",
     beneficial: true,
     inModel: true,
     image: ["/bugs/wasp.jpg", "/bugs/wasp.png"],
     learnMore: "https://en.wikipedia.org/wiki/Wasp",
-    blurb: "Most wasps are natural enemies that hunt caterpillars and aphids — usually an ally, not a pest.",
+    blurb: "Most wasps are natural enemies that hunt caterpillars and aphids, so usually an ally rather than a pest.",
   },
   {
     label: "weevil",
     name: "Weevil",
-    emoji: "🐞",
     scientific: "Curculionoidea",
     group: "Storage",
     inModel: true,
@@ -150,7 +138,6 @@ export const BUGS = [
   {
     label: "brown_planthopper",
     name: "Brown planthopper",
-    emoji: "🦟",
     scientific: "Nilaparvata lugens",
     group: "Paddy",
     inModel: true,
@@ -161,7 +148,6 @@ export const BUGS = [
   {
     label: "rice_stem_borer",
     name: "Rice stem borer",
-    emoji: "🌾",
     scientific: "Scirpophaga incertulas",
     group: "Paddy",
     inModel: true,
@@ -172,7 +158,6 @@ export const BUGS = [
   {
     label: "fall_armyworm",
     name: "Fall armyworm",
-    emoji: "🐛",
     scientific: "Spodoptera frugiperda",
     group: "Maize",
     inModel: true,
@@ -183,7 +168,6 @@ export const BUGS = [
   {
     label: "fruit_fly",
     name: "Fruit fly",
-    emoji: "🪰",
     scientific: "Bactrocera dorsalis",
     group: "Fruit",
     inModel: true,
@@ -194,7 +178,6 @@ export const BUGS = [
   {
     label: "thrips",
     name: "Thrips",
-    emoji: "🐜",
     scientific: "Thysanoptera",
     group: "Vegetable",
     inModel: true,
@@ -205,7 +188,6 @@ export const BUGS = [
   {
     label: "mealybug",
     name: "Mealybug",
-    emoji: "🪳",
     scientific: "Pseudococcidae",
     group: "General",
     inModel: true,
@@ -216,7 +198,6 @@ export const BUGS = [
   {
     label: "leafhopper",
     name: "Leafhopper",
-    emoji: "🦗",
     scientific: "Cicadellidae",
     group: "Paddy",
     inModel: true,
@@ -227,7 +208,6 @@ export const BUGS = [
   {
     label: "aphid",
     name: "Aphid",
-    emoji: "🐜",
     scientific: "Aphididae",
     group: "Vegetable",
     inModel: false,
@@ -238,7 +218,6 @@ export const BUGS = [
   {
     label: "whitefly",
     name: "Whitefly",
-    emoji: "🦟",
     scientific: "Aleyrodidae",
     group: "Vegetable",
     inModel: false,
@@ -249,29 +228,26 @@ export const BUGS = [
   {
     label: "spider_mite",
     name: "Red spider mite",
-    emoji: "🕷️",
     scientific: "Tetranychus urticae",
     group: "Vegetable",
     inModel: false,
     image: ["/bugs/spider_mite.jpg", "/bugs/spider_mite.png"],
     learnMore: "https://en.wikipedia.org/wiki/Tetranychus_urticae",
-    blurb: "Almost invisible mites that stipple leaves yellow and leave fine webbing. Thrive in hot, dusty, dry weather — keep plants well watered.",
+    blurb: "Almost invisible mites that stipple leaves yellow and leave fine webbing. They thrive in hot, dusty, dry weather, so keep plants well watered.",
   },
   {
     label: "diamondback_moth",
     name: "Diamondback moth",
-    emoji: "🦋",
     scientific: "Plutella xylostella",
     group: "Vegetable",
     inModel: false,
     image: ["/bugs/diamondback_moth.jpg", "/bugs/diamondback_moth.png"],
     learnMore: "https://en.wikipedia.org/wiki/Diamondback_moth",
-    blurb: "The worst cabbage-family pest worldwide. Larvae make 'windows' in leaves and resist many insecticides — rotate products and use Bt.",
+    blurb: "The worst cabbage-family pest worldwide. Larvae make 'windows' in leaves and resist many insecticides, so rotate products and use Bt.",
   },
   {
     label: "pod_borer",
     name: "Pod / fruit borer",
-    emoji: "🐛",
     scientific: "Helicoverpa armigera",
     group: "Vegetable",
     inModel: false,
@@ -282,7 +258,6 @@ export const BUGS = [
   {
     label: "rice_bug",
     name: "Rice bug",
-    emoji: "🌾",
     scientific: "Leptocorisa oratoria",
     group: "Paddy",
     inModel: false,
@@ -293,7 +268,6 @@ export const BUGS = [
   {
     label: "rice_gall_midge",
     name: "Rice gall midge",
-    emoji: "🌾",
     scientific: "Orseolia oryzae",
     group: "Paddy",
     inModel: false,
@@ -304,7 +278,6 @@ export const BUGS = [
   {
     label: "rice_hispa",
     name: "Rice hispa",
-    emoji: "🪲",
     scientific: "Dicladispa armigera",
     group: "Paddy",
     inModel: false,
@@ -315,7 +288,6 @@ export const BUGS = [
   {
     label: "coconut_beetle",
     name: "Coconut rhinoceros beetle",
-    emoji: "🪲",
     scientific: "Oryctes rhinoceros",
     group: "Plantation",
     inModel: false,
@@ -326,18 +298,16 @@ export const BUGS = [
   {
     label: "red_palm_weevil",
     name: "Red palm weevil",
-    emoji: "🐞",
     scientific: "Rhynchophorus ferrugineus",
     group: "Plantation",
     inModel: false,
     image: ["/bugs/red_palm_weevil.jpg", "/bugs/red_palm_weevil.png"],
     learnMore: "https://en.wikipedia.org/wiki/Rhynchophorus_ferrugineus",
-    blurb: "A hidden killer of palms — grubs tunnel through the trunk until the crown collapses. Avoid wounding trunks, which attracts egg-laying.",
+    blurb: "A hidden killer of palms, whose grubs tunnel through the trunk until the crown collapses. Avoid wounding trunks, which attracts egg-laying.",
   },
   {
     label: "banana_weevil",
     name: "Banana weevil",
-    emoji: "🐞",
     scientific: "Cosmopolites sordidus",
     group: "Plantation",
     inModel: false,
@@ -348,7 +318,6 @@ export const BUGS = [
   {
     label: "tea_mosquito_bug",
     name: "Tea mosquito bug",
-    emoji: "🦟",
     scientific: "Helopeltis antonii",
     group: "Plantation",
     inModel: false,
@@ -359,7 +328,6 @@ export const BUGS = [
   {
     label: "termite",
     name: "Termite",
-    emoji: "🐜",
     scientific: "Isoptera",
     group: "General",
     inModel: false,
@@ -370,7 +338,6 @@ export const BUGS = [
   {
     label: "scale_insect",
     name: "Scale insect",
-    emoji: "🪳",
     scientific: "Coccoidea",
     group: "Plantation",
     inModel: false,
@@ -381,7 +348,6 @@ export const BUGS = [
   {
     label: "cutworm",
     name: "Cutworm",
-    emoji: "🐛",
     scientific: "Agrotis ipsilon",
     group: "Vegetable",
     inModel: false,
@@ -392,7 +358,6 @@ export const BUGS = [
   {
     label: "mole_cricket",
     name: "Mole cricket",
-    emoji: "🦗",
     scientific: "Gryllotalpidae",
     group: "General",
     inModel: false,
@@ -403,7 +368,6 @@ export const BUGS = [
   {
     label: "stink_bug",
     name: "Stink bug",
-    emoji: "🪲",
     scientific: "Nezara viridula",
     group: "Vegetable",
     inModel: false,
@@ -414,19 +378,17 @@ export const BUGS = [
   {
     label: "ladybird",
     name: "Ladybird beetle",
-    emoji: "🐞",
     scientific: "Coccinellidae",
     group: "Beneficial",
     beneficial: true,
     inModel: false,
     image: ["/bugs/ladybird.jpg", "/bugs/ladybird.png"],
     learnMore: "https://en.wikipedia.org/wiki/Coccinella_septempunctata",
-    blurb: "One of the best friends a farmer has — a single larva can eat hundreds of aphids, mites and mealybugs. Never spray them off.",
+    blurb: "One of the best friends a farmer has. A single larva can eat hundreds of aphids, mites and mealybugs. Never spray them off.",
   },
   {
     label: "lacewing",
     name: "Green lacewing",
-    emoji: "🦋",
     scientific: "Chrysoperla carnea",
     group: "Beneficial",
     beneficial: true,
@@ -438,7 +400,6 @@ export const BUGS = [
   {
     label: "mantis",
     name: "Praying mantis",
-    emoji: "🦗",
     scientific: "Mantodea",
     group: "Beneficial",
     beneficial: true,
@@ -450,7 +411,6 @@ export const BUGS = [
   {
     label: "spider",
     name: "Spider",
-    emoji: "🕷️",
     scientific: "Araneae",
     group: "Beneficial",
     beneficial: true,
@@ -462,7 +422,6 @@ export const BUGS = [
   {
     label: "dragonfly",
     name: "Dragonfly",
-    emoji: "🦟",
     scientific: "Odonata",
     group: "Beneficial",
     beneficial: true,
@@ -474,7 +433,6 @@ export const BUGS = [
   {
     label: "hoverfly",
     name: "Hoverfly",
-    emoji: "🪰",
     scientific: "Syrphidae",
     group: "Beneficial",
     beneficial: true,
@@ -486,7 +444,6 @@ export const BUGS = [
   {
     label: "ground_beetle",
     name: "Ground beetle",
-    emoji: "🪲",
     scientific: "Carabidae",
     group: "Beneficial",
     beneficial: true,

@@ -1,12 +1,20 @@
 // Reusable image with a shimmer placeholder while loading and graceful fallbacks.
 //
-// `src` may be a single URL or an ARRAY of candidates — they're tried in order, so a
+// `src` may be a single URL or an ARRAY of candidates - they're tried in order, so a
 // card can accept e.g. ['/bugs/ants.jpg', '/bugs/ants.png'] and use whichever the user
-// actually dropped in. If every candidate fails we show a themed gradient + emoji, so
-// a card never looks broken.
+// actually dropped in. If every candidate fails we show a themed gradient with a line
+// icon, so a card never looks broken.
 import { useEffect, useState } from 'react'
+import { Leaf } from 'lucide-react'
 
-export default function Img({ src, alt, className = '', emoji = '🌿', ratio = '16x9', zoom = false }) {
+export default function Img({
+  src,
+  alt,
+  className = '',
+  icon: Icon = Leaf,
+  ratio = '16x9',
+  zoom = false,
+}) {
   const list = (Array.isArray(src) ? src : [src]).filter(Boolean)
   const key = list.join('|')
 
@@ -45,7 +53,7 @@ export default function Img({ src, alt, className = '', emoji = '🌿', ratio = 
         </>
       ) : (
         <div className="img-fallback" aria-hidden="true">
-          <span>{emoji}</span>
+          <Icon size={30} strokeWidth={1.5} />
         </div>
       )}
     </div>

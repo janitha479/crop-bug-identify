@@ -108,8 +108,9 @@ def list_detections():
 @farms_api.get("/report.pdf")
 @login_required
 def report_pdf():
-    """A simple PDF summary of the farmer's farms, current weather and top risks."""
-    from fpdf import FPDF  # imported lazily so the app runs without fpdf2 installed
+    """Styled PDF summary of the farmer's farms, current weather and top risks."""
+    # Imported lazily so the app still runs if fpdf2 isn't installed.
+    from .pdf_report import build_report
 
     farms = g.db.query(Farm).filter_by(user_id=g.user.id).order_by(Farm.created_at).all()
     recent = (
@@ -120,53 +121,9 @@ def report_pdf():
         .all()
     )
 
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Helvetica", "B", 16)
-    pdf.cell(0, 10, "Smart Pest Detection - Farm Report", ln=True)
-    pdf.set_font("Helvetica", "", 10)
-    who = g.user.full_name or g.user.email
-    pdf.cell(0, 7, f"Farmer: {who}", ln=True)
-    pdf.cell(0, 7, f"Generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}", ln=True)
-    pdf.ln(3)
+    snapshots = [_farm_snapshot(f) for f in farms]
+    out = build_report(g.user, snapshots, recent)
 
-    pdf.set_font("Helvetica", "B", 13)
-    pdf.cell(0, 9, "Your farms", ln=True)
-    pdf.set_font("Helvetica", "", 10)
-    if not farms:
-        pdf.cell(0, 7, "No farms saved yet.", ln=True)
-    for f in farms:
-        snap = _farm_snapshot(f)
-        w = snap["weather"]
-        risk = snap["top_risk"]
-        pdf.set_font("Helvetica", "B", 11)
-        pdf.cell(0, 7, f"- {f.name}  ({f.place_label or f'{f.latitude:.2f}, {f.longitude:.2f}'})", ln=True)
-        pdf.set_font("Helvetica", "", 10)
-        if w:
-            pdf.cell(0, 6, f"    Weather: {round(w['temperature'])} C, {w['description']}, "
-                          f"{round(w['humidity'])}% humidity", ln=True)
-        if risk:
-            pdf.cell(0, 6, f"    Top risk: {risk['common_name']} ({risk['risk_level']}) - "
-                          f"{risk['when_label']}", ln=True)
-        pdf.ln(1)
-
-    pdf.ln(2)
-    pdf.set_font("Helvetica", "B", 13)
-    pdf.cell(0, 9, "Recent pest scans", ln=True)
-    pdf.set_font("Helvetica", "", 10)
-    if not recent:
-        pdf.cell(0, 7, "No scans logged yet.", ln=True)
-    for d in recent:
-        when = d.created_at.strftime("%Y-%m-%d") if d.created_at else ""
-        name = d.common_name or d.pest_label or "Unknown"
-        pdf.cell(0, 6, f"- {when}: {name} ({round(d.confidence * 100)}%)", ln=True)
-
-    pdf.ln(4)
-    pdf.set_font("Helvetica", "I", 8)
-    pdf.multi_cell(0, 5, "Predictions use a seasonal calendar blended with live weather. "
-                         "Always confirm with your local agricultural extension officer.")
-
-    out = bytes(pdf.output())
     return send_file(
         BytesIO(out),
         mimetype="application/pdf",

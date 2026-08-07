@@ -32,7 +32,7 @@ export const stagger = (delayChildren = 0, staggerChildren = 0.08) => ({
   show: { transition: { delayChildren, staggerChildren } },
 })
 
-/** Returns [ref, shown] — true once scrolled into view, or after a safety timeout. */
+/** Returns [ref, shown] - true once scrolled into view, or after a safety timeout. */
 export function useReveal(amount = 0.15) {
   const ref = useRef(null)
   const [shown, setShown] = useState(false)
@@ -42,7 +42,7 @@ export function useReveal(amount = 0.15) {
     if (!el) return
     let timer
 
-    // Safety net — never leave content permanently invisible.
+    // Safety net - never leave content permanently invisible.
     timer = setTimeout(() => setShown(true), FALLBACK_MS)
 
     if (typeof IntersectionObserver === 'undefined') {
@@ -95,7 +95,7 @@ export function Reveal({ children, variants = fadeUp, delay = 0, className = '',
   )
 }
 
-/** Staggered container — pair with <RevealItem> children. */
+/** Staggered container - pair with <RevealItem> children. */
 export function RevealGroup({ children, className = '', delayChildren = 0, gap = 0.08 }) {
   const reduce = useReducedMotion()
   const [ref, shown] = useReveal(0.1)

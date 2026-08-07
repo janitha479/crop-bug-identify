@@ -36,7 +36,7 @@ export default function Pagination({ page, pageCount, total, from, to, next, pre
   return (
     <div className="pager d-flex flex-wrap align-items-center gap-2 justify-content-between">
       <span className="pager-count">
-        Showing <strong>{from}–{to}</strong> of <strong>{total}</strong> {label}
+        Showing <strong>{from}-{to}</strong> of <strong>{total}</strong> {label}
       </span>
 
       {pageCount > 1 && (

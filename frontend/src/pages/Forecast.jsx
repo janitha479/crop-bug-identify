@@ -145,7 +145,7 @@ export default function Forecast() {
                 <div className="empty-state-icon"><CheckCircle2 size={24} /></div>
                 <div className="fw-semibold">No significant pest surges predicted</div>
                 <div className="text-secondary small mt-1">
-                  Nothing expected in the next {data.months_ahead} months — keep scouting regularly.
+                  Nothing expected in the next {data.months_ahead} months. Keep scouting regularly.
                 </div>
               </div>
             ) : (

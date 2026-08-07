@@ -31,7 +31,7 @@ export default function PestCard({ pest, topPrediction, imageUrl }) {
         <div className="mt-2 d-flex flex-wrap gap-1">
           {pest.beneficial ? (
             <span className="badge bg-success-subtle text-success-emphasis border border-success">
-              Beneficial — don't kill
+              Beneficial, don't kill
             </span>
           ) : (
             pest.severity && pest.severity !== 'none' && (

@@ -1,5 +1,5 @@
 // Shows the full outbreak forecast for ONE saved farm, without making the farmer
-// re-enter the location — it fetches straight from the farm's stored coordinates.
+// re-enter the location - it fetches straight from the farm's stored coordinates.
 import { useEffect, useState } from 'react'
 import Modal from './Modal'
 import OutbreakCard from './OutbreakCard'
@@ -20,7 +20,7 @@ export default function FarmForecastModal({ farm, onClose }) {
   const { status, data } = state
 
   return (
-    <Modal title={`Pest forecast — ${farm.name}`} onClose={onClose} wide>
+    <Modal title={`Pest forecast: ${farm.name}`} onClose={onClose} wide>
       <p className="text-secondary small mb-3">
         📍 {farm.place_label || `${farm.latitude.toFixed(2)}, ${farm.longitude.toFixed(2)}`}
       </p>
@@ -31,7 +31,7 @@ export default function FarmForecastModal({ farm, onClose }) {
 
       {status === 'error' && (
         <div className="alert alert-light border mb-0">
-          Couldn’t load the forecast right now — make sure the backend is running.
+          Couldn’t load the forecast right now. Make sure the backend is running.
         </div>
       )}
 

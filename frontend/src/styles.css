@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Smart Pest Detection — design system
+   Smart Pest Detection - design system
    Hybrid direction: warm editorial for public pages, crisp data-forward for
    the dashboard/forecast. All legacy class names are preserved so behaviour
    and markup keep working; only the presentation changed.
@@ -94,7 +94,7 @@ h1, h2, h3, .display-5, .display-6 {
 
 a { color: var(--brand-dark); }
 
-/* Focus ring — accessible and on-brand */
+/* Focus ring - accessible and on-brand */
 :focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
@@ -111,7 +111,7 @@ a { color: var(--brand-dark); }
 }
 .section-warm { background: var(--page-warm); }
 
-/* Soft grain overlay — kills the "flat" feel without being noticeable */
+/* Soft grain overlay - kills the "flat" feel without being noticeable */
 .grain::before {
   content: '';
   position: absolute; inset: 0; pointer-events: none; opacity: 0.5;

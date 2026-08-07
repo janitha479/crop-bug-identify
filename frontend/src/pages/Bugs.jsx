@@ -1,5 +1,5 @@
 // Bugs section: a reading guide to the insects Sri Lankan farmers meet. This is
-// deliberately BROADER than the model's 19 classes — cards the CNN can identify from
+// deliberately BROADER than the model's 19 classes - cards the CNN can identify from
 // a photo carry a "Photo ID" badge, the rest are reference-only.
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -51,7 +51,7 @@ export default function Bugs() {
               Know the bug, save the harvest
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.85)', maxWidth: '64ch' }}>
-              A field guide to the insects you meet on Sri Lankan farms — the ones that damage
+              A field guide to the insects you meet on Sri Lankan farms: the ones that damage
               crops and the ones quietly protecting them. The trick is to{' '}
               <strong style={{ color: '#fff' }}>identify first, then treat only the real problem</strong>.
             </p>
@@ -262,7 +262,7 @@ export default function Bugs() {
 
               {!detail.inModel && (
                 <p className="text-muted small mt-3 mb-0">
-                  Note: this one isn’t in the photo-identification model yet — the assistant can
+                  Note: this one isn’t in the photo-identification model yet, but the assistant can
                   still answer questions about it by name.
                 </p>
               )}

@@ -358,7 +358,7 @@ export default function Dashboard() {
             <div className="empty-state-icon"><Bug size={24} /></div>
             <div className="fw-semibold">No scans yet</div>
             <div className="text-secondary small mt-1">
-              Use the assistant to identify a pest from a photo — it will show up here.
+              Use the assistant to identify a pest from a photo and it will show up here.
             </div>
           </div>
         ) : (

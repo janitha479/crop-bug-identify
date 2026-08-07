@@ -117,7 +117,7 @@ export default function LocationPicker() {
               transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             >
               {results.length === 0 ? (
-                <div className="text-secondary small">No places found — try a different spelling.</div>
+                <div className="text-secondary small">No places found. Try a different spelling.</div>
               ) : (
                 <ul className="list-group">
                   {results.map((p, i) => (
